@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grades</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            color: white;
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1em;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .content {
+            padding: 2em;
+            text-align: center;
+        }
+        table {
+            margin: 0 auto;
+            width: 50%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 1em;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div>
+            <a href="#">Home</a>
+            <a href="#">Grades</a>
+            <a href="#">Profile</a>
+        </div>
+        <div>
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+
+    <!-- Grades Content -->
+    <div class="content">
+        <h1>Welcome, {{ username }}!</h1>
+        <h2>Your Grades</h2>
+        <table>
+            <tr>
+                <th>Subject</th>
+                <th>Grade</th>
+                <th>Comments</th>
+
+            </tr>
+            <tr>
+                <td>Math</td>
+                <td>{{ grade }}</td>
+                <td>{{ comments | safe }}</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

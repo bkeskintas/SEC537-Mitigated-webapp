@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center text-success">Student Dashboard</h2>
+        <div class="card mt-3">
+            <div class="card-header bg-success text-white">
+                <h4>Your Grade and Comments</h4>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Grade: {{ grade }}</h5>
+                <!-- Render comments without escaping (vulnerable to XSS) -->
+                <p class="card-text">Comments: {{ comments | safe }}</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
