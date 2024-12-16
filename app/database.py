@@ -1,7 +1,7 @@
 import sqlite3
 
 def init_db():
-    conn = sqlite3.connect('vulnerable.db')
+    conn = sqlite3.connect('normal.db')
     c = conn.cursor()
     # Recreate the grades table with a comments column
     c.execute('''CREATE TABLE IF NOT EXISTS grades (
