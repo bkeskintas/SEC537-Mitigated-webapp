@@ -62,36 +62,63 @@
                 <a href="{{ url_for('main.logout') }}">Logout</a>
             {% else %}
                 <!-- Show Register and Login for non-logged-in users -->
-                <a href="{{ url_for('main.register') }}">Register</a>
+                <a href="{{ url_for('main.login') }}">Login</a>
             {% endif %}
         </div>
     </div>
-
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card shadow-lg">
                     <div class="card-header bg-primary text-white text-center">
-                        <h3>Login</h3>
+                        <h3>Register</h3>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="/login">
-                            <!-- CSRF Token -->
-                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <form method="POST">
+                            {{ form.hidden_tag() }} <!-- CSRF Token -->
+
+                            <!-- Username Field -->
                             <div class="form-group">
                                 <label for="username">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" required>
+                                {{ form.username(class="form-control", placeholder="Enter your username") }}
+                                {% if form.username.errors %}
+                                    <div class="text-danger">
+                                        {{ form.username.errors[0] }}
+                                    </div>
+                                {% endif %}
                             </div>
+
+                            <!-- Password Field -->
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
+                                {{ form.password(class="form-control", placeholder="Enter a strong password") }}
+                                {% if form.password.errors %}
+                                    <div class="text-danger">
+                                        {{ form.password.errors[0] }}
+                                    </div>
+                                {% endif %}
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+
+                            <!-- Confirm Password Field -->
+                            <div class="form-group">
+                                <label for="confirm_password">Confirm Password</label>
+                                {{ form.confirm_password(class="form-control", placeholder="Confirm your password") }}
+                                {% if form.confirm_password.errors %}
+                                    <div class="text-danger">
+                                        {{ form.confirm_password.errors[0] }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn btn-success btn-block">Register</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+   
 </body>
 </html>

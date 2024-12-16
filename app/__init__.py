@@ -1,6 +1,11 @@
 import os
 from flask import Flask
 from flask_wtf import CSRFProtect
+import os
+from flask import Flask
+from flask_wtf.csrf import CSRFProtect
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 def create_app():
     app = Flask(__name__)
@@ -22,6 +27,9 @@ def create_app():
     @app.errorhandler(404)
     def not_found(e):
         return "Page not found.", 404
+    
+    # Rate Limiting
+    limiter = Limiter(get_remote_address, app=app, default_limits=["10 per minute"])
     
 
     from app.database import init_db

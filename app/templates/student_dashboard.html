@@ -50,12 +50,21 @@
 <body>
     <div class="navbar">
         <div>
-            <a href="#">Home</a>
-            <a href="#">Grades</a>
-            <a href="#">Profile</a>
+            {% if 'username' in session %}
+                <a href="/dashboard">Dashboard</a>
+                <a href="#">Home</a>
+                <a href="#">Grades</a>
+                <a href="#">Profile</a>
+            {% endif %}
         </div>
         <div>
-            <a href="/logout">Logout</a>
+            {% if 'username' in session %}
+                <!-- Show Logout for logged-in users -->
+                <a href="{{ url_for('main.logout') }}">Logout</a>
+            {% else %}
+                <!-- Show Register and Login for non-logged-in users -->
+                <a href="{{ url_for('main.register') }}">Register</a>
+            {% endif %}
         </div>
     </div>
 
