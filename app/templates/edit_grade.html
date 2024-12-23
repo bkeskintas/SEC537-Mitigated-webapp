@@ -199,7 +199,69 @@
     width: 50%; /* Optional: Adjust as needed */
     border-collapse: collapse;
     padding: 2rem;
-}
+    }
+    form {
+            background-color: #d2d6d6;
+            margin: 30px 20px;
+            padding: 20px;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        label {
+            font-weight: bold;
+            color: #4a4a4a;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        button {
+            background-color: #2b5069;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 0 auto;
+        }
+
+        button:hover {
+            background-color: #005a9e;
+        }
+
+        button:active {
+            background-color: #004a80;
+        }
+
+        @media (max-width: 600px) {
+            form {
+                width: 90%;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -238,30 +300,18 @@
         <div class="middle-bar">
         
         </div>
-        <div class="wrapper">
-        <div class="header"> All Students' Grades</div>
-        
-            <table >
-                <tr>
-                    <th>Student</th>
-                    <th>Course</th>
-                    <th>Grade</th>
-                    <th>Comments</th>
-                    <th>Actions</th>
-                </tr>
-                {% for username, course, grade, comments, grade_id in grades %}
-                <tr>
-                    <td>{{ username }}</td>
-                    <td>{{ course }}</td>
-                    <td>{{ grade }}</td>
-                    <td>{{ comments }}</td>
-                    <td>
-                        <a href="{{ url_for('main.edit_grade', grade_id=grade_id) }}">Edit</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </table>      
-    </div>
+     <div class="wrapper">
+            <div class="header">Edit Grade for {{ grade_data[0] }}</div>
+            <form method="POST">
+                <label for="grade">Grade:</label><br>
+                <input type="text" id="grade" name="grade" value="{{ grade_data[1] }}" required><br><br>
+                
+                <label for="comments">Comments:</label><br>
+                <textarea id="comments" name="comments" required>{{ grade_data[2] }}</textarea><br><br>
+                
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
     <!-- JavaScript to Toggle the Dropdown -->
     <script>
         function toggleDropdown() {
@@ -278,5 +328,7 @@
             }
         }
     </script>
-    </body>
-    </html>
+</body>
+
+
+</html>

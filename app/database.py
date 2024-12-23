@@ -1,56 +1,59 @@
 import sqlite3
-import pyotp
+from werkzeug.security import generate_password_hash
+import logging
+
+logging.basicConfig(filename='db_operations.log', level=logging.INFO)
 
 def init_db():
-    conn = sqlite3.connect('normal.db')
+    conn = sqlite3.connect('normal.db') 
     c = conn.cursor()
 
-    # Create the 'users' table with an 'otp_secret' column for MFA
     c.execute('''CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY,
-        username TEXT UNIQUE NOT NULL,
+        username TEXT UNIQUE,
         password TEXT NOT NULL,
-        role TEXT NOT NULL,
-        otp_secret TEXT NOT NULL
+        role TEXT NOT NULL CHECK(role IN ('admin', 'student'))
     )''')
 
-    # Create the 'grades' table
     c.execute('''CREATE TABLE IF NOT EXISTS grades (
-        student_id INTEGER,
-        grade TEXT,
-        comments TEXT
+        id INTEGER PRIMARY KEY,
+        student_id INTEGER NOT NULL,
+        course TEXT NOT NULL,
+        grade TEXT CHECK(grade IN ('A', 'B', 'C', 'D', 'F')),
+        comments TEXT,
+        FOREIGN KEY(student_id) REFERENCES users(id)
     )''')
 
-    # Generate OTP secret keys for users
-    admin_otp = pyotp.random_base32()
-    duygu_otp = pyotp.random_base32()
-    burak_otp = pyotp.random_base32()
+    #check if users table is empty,  if not it won't do this
+    c.execute('SELECT COUNT(*) FROM users')
+    if c.fetchone()[0] == 0:  #only insert if the table is empty
+        users = [
+            ('admin', generate_password_hash('Az09.IamAmin', method='pbkdf2:sha256'), 'admin'),
+            ('duygu', generate_password_hash('Az09.IamDuygu', method='pbkdf2:sha256'), 'student'),
+            ('burak', generate_password_hash('Az09.IamBurak', method='pbkdf2:sha256'), 'student')
+        ]
+        for user in users:
+            c.execute('INSERT INTO users (username, password, role) VALUES (?, ?, ?)', user)
+            logging.info(f"Inserted user: {user[0]}")
 
-    # Insert users with OTP secret keys
-    try:
-        c.execute("INSERT INTO users (username, password, role, otp_secret) VALUES (?, ?, ?, ?)", 
-                  ('admin', 'admin123', 'admin', admin_otp))
-        c.execute("INSERT INTO users (username, password, role, otp_secret) VALUES (?, ?, ?, ?)", 
-                  ('duygu', 'duygu123', 'student', duygu_otp))
-        c.execute("INSERT INTO users (username, password, role, otp_secret) VALUES (?, ?, ?, ?)", 
-                  ('burak', 'burak123', 'student', burak_otp))
-    except sqlite3.IntegrityError:
-        print("Users already exist in the database.")
-
-    # Insert sample grades data
-    c.execute("INSERT OR IGNORE INTO grades (student_id, grade, comments) VALUES (?, ?, ?)", (1, 'A', 'Great job!'))
-    c.execute("INSERT OR IGNORE INTO grades (student_id, grade, comments) VALUES (?, ?, ?)", (2, 'A', 'Excellent work!'))
-    c.execute("INSERT OR IGNORE INTO grades (student_id, grade, comments) VALUES (?, ?, ?)", (3, 'B', 'Needs improvement'))
+    #check if grades table is empty, if not it won't do this
+    c.execute('SELECT COUNT(*) FROM grades')
+    if c.fetchone()[0] == 0:  #only insert if the table is empty
+        grades = [
+            (2, 'Human Computer Interaction', 'A', 'Outstanding'),
+            (2, 'Cybersecurity Practices and App.', 'A', 'Great job!'),
+            (2, 'Fundamentals of Computing', 'A', 'Outstanding'),
+            (2, 'Math', 'A', 'Great job!'),
+            (2, 'Physics', 'A', 'Outstanding'),
+            (3, 'Math', 'C', 'Needs improvement'),
+            (3, 'Chemistry', 'B', 'Good progress')
+        ]
+        for grade in grades:
+            c.execute('INSERT INTO grades (student_id, course, grade, comments) VALUES (?, ?, ?, ?)', grade)
+            logging.info(f"Inserted grade for student_id {grade[0]} in course {grade[1]}")
 
     conn.commit()
     conn.close()
 
-    # Print OTP secrets for testing purposes (remove this in production)
-    print("User OTP Secrets (For Testing):")
-    print(f"Admin OTP Secret: {admin_otp}")
-    print(f"Duygu OTP Secret: {duygu_otp}")
-    print(f"Burak OTP Secret: {burak_otp}")
-
-# Run the function to initialize the database
-if __name__ == "__main__":
+if __name__ == '__main__':
     init_db()

@@ -68,28 +68,6 @@
             text-align: center;
         }
 
-        table {
-            margin: 0 auto;
-            width: 50%;
-            border-collapse: collapse;
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid #ddd;
-        }
-
-        th,
-        td {
-            padding: 1em;
-            text-align: center;
-        }
-
-        th {
-            background-color: #f4f4f4;
-        }
-
         .initialBox {
             margin-top: 1.5rem;
             margin-left: 4rem;
@@ -106,41 +84,6 @@
 
         }
 
-        .cardBg {
-            background-color: #eeeef0;
-            border: none;
-            border-radius: 0rem;
-        }
-
-        .formInp {
-            padding-bottom: 2.5rem;
-        }
-
-        .inputPd {
-            padding-bottom: 1rem;
-        }
-
-        .inputStyl {
-            border: none;
-            border-radius: 0rem;
-            height: 2.6rem;
-        }
-
-        .lostPssw {
-            font-size: 14px;
-        }
-
-
-
-        /* User Profile Container */
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            /* Adds space between elements */
-        }
-
-        /* Notification Badge */
         .notification {
             position: relative;
         }
@@ -157,7 +100,6 @@
             padding: 3px 6px;
         }
 
-        /* User Name Styling */
         .user-name {
             font-size: 16px;
             color: #2c577b;
@@ -178,70 +120,17 @@
             color: #758e9f;
         }
 
-        .dashboard {
+        .grades-container {
+
             padding: 20px;
-        }
-
-        /* Card Grid */
-        .card-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            justify-content: center;
+            background-color: #fff;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
 
         }
 
-        .card {
-            border-radius: 0px;
-            overflow: hidden;
-            text-align: center;
-            padding: 20px;
-            height: 200px;
-            transition: transform 0.3s ease;
-            background-image: url("{{ url_for('static', filename='bg.png') }}");
-        }
-
-        .card p {
-            margin: 5px 0;
-            color: #555;
-        }
-
-        .course-view {
-            padding-top: 0.5rem;
-            color: #333;
-            font-size: 16px;
-            padding-left: 0.5rem;
-
-        }
-
-        .wrapper {
-            display: flex;
-            flex-direction: row;
-            background-color: #e4e7e9;
-            height: 40px;
+        h2 {
             margin-bottom: 20px;
-        }
-
-        .star {
-            background-color: #234275;
-            font-size: 36px;
-            color: white;
-            width: 40px;
-            text-align: center;
-        }
-
-        .card-wrapper {
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .course {
-            background-color: white;
-            text-align: center;
-            font-size: 18px;
-            font-weight: 700;
-            color: #434343;
         }
 
         .dropdown-menu {
@@ -281,6 +170,69 @@
             gap: 10px;
             cursor: pointer;
         }
+
+        .container {
+            max-width: 800px;
+            background-color: #f3f2f6;
+            padding: 20px;
+           
+            margin-top: 2rem;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+         
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #0073C1;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005A9E;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        .course {
+            color: white;
+            text-align: center;
+            margin-left: 10px;
+        }
+
+        .urlWrapper {
+            display: flex;
+            align-items: start;
+            justify-content: flex-start;
+
+        }
+        .header{
+        color:#6e6f6f;
+        padding-bottom: 2rem;
+        font-size: 28px;
+        font-weight: 600;
+    }
+    .btn{
+        margin-top: 2rem;
+        margin-right: -10px;
+        margin-bottom: 2rem;
+       
+    }
     </style>
 </head>
 
@@ -318,25 +270,18 @@
         </div>
 
         <div class="middle-bar">
+            <a class="course" href="{{ url_for('main.student_dashboard', student_id=student_id) }}">My Courses</a>
 
         </div>
-
-        <div class="dashboard">
-            <div class="wrapper">
-                <div class="star">*</div>
-                <div class="course-view">Course overview </div>
-            </div>
-            <div style="cursor: pointer;" class="card-container">
-
-                {% for course in courses %}
-                <div class="card-wrapper" style="cursor: pointer;" onclick="redirectToResource('{{ loop.index0 }}')">
-                    <div class="card"></div>
-                    <div class="course">{{ course[0] }}</div>
-                </div>
-                {% endfor %}
+        <div class="urlWrapper">
+            <div class="container">
+                <div class="header">Upload External Course Resource</div>
+                <form method="post" enctype="multipart/form-data">
+                    <input type="file" name="file">
+                    <button type="submit">Upload</button>
+                </form>
             </div>
         </div>
-        <!-- JavaScript to Toggle the Dropdown -->
         <script>
             function toggleDropdown() {
                 const dropdownMenu = document.getElementById('dropdownMenu');
@@ -348,15 +293,6 @@
                 const userProfile = document.querySelector('.user-profile');
                 if (!userProfile.contains(event.target)) {
                     dropdownMenu.style.display = 'none';
-                }
-            }
-            function redirectToResource(index) {
-                index = parseInt(index, 10);
-                
-                if (index % 2 === 0) {
-                    window.location.href = "{{ url_for('main.upload_resource', student_id=student_id) }}";
-                } else {
-                    window.location.href = "{{ url_for('main.upload_file', student_id=student_id) }}";
                 }
             }
         </script>

@@ -112,6 +112,80 @@
   
 
 
+    /* User Profile Container */
+    .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Adds space between elements */
+    }
+
+    /* Notification Badge */
+    .notification {
+        position: relative;
+    }
+
+    .notification-badge {
+        position: absolute;
+        top: -8px;
+        left: 8px;
+        background-color: red;
+        color: white;
+        font-size: 8px;
+        font-weight: bold;
+        border-radius: 50%;
+        padding: 3px 6px;
+    }
+
+    /* User Name Styling */
+    .user-name {
+        font-size: 16px;
+        color: #2c577b;
+        font-weight: bold;
+    }
+
+    /* Profile Image Styling */
+    .profile-img {
+        height: 40px;
+        width: 60px;
+        border-radius: 50%; /* Makes the image circular */
+        border: 2px solid #afbaf0;
+
+    }
+    .icn{
+        color: #758e9f;
+    }
+    .grades-container {
+           
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+           
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+        }
+        .course{
+            color: white;
+            text-align: center;
+            margin-left: 10px;
+        }
         .dropdown-menu {
             position: absolute;
             top: 60px; 
@@ -148,58 +222,31 @@
             gap: 10px;
             cursor: pointer;
         }
-    /* Notification Badge */
-    .notification {
-        position: relative;
-    }
+        .grades{
+            font-size: 20px;
+            color:#707072;
+            font-weight: 700;
+        }
+        .profWrapper{
+            height: 8rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        .profPic{
+            height: 100px;
+            width: 70px;
+            border-radius: 50%; /* Makes the image circular */
+            border: 2px solid #afbaf0;
+            margin-right: 1rem;
+            margin-left: 1rem;
 
-    .notification-badge {
-        position: absolute;
-        top: -8px;
-        left: 8px;
-        background-color: red;
-        color: white;
-        font-size: 8px;
-        font-weight: bold;
-        border-radius: 50%;
-        padding: 3px 6px;
-    }
-
-    /* User Name Styling */
-    .user-name {
-        font-size: 16px;
-        color: #2c577b;
-        font-weight: bold;
-    }
-
-    /* Profile Image Styling */
-    .profile-img {
-        height: 40px;
-        width: 60px;
-        border-radius: 50%; /* Makes the image circular */
-        border: 2px solid #afbaf0;
-
-    }
-    .icn{
-        color: #758e9f;
-    }
-    .header{
-        color:#6e6f6f;
-        padding-bottom: 1rem;
-        font-size: 28px;
-        font-weight: 600;
-    }
-    .wrapper{
-        display: flex;
-        flex-direction: column;
-        padding: 2rem;
-    }
-    table {
-    margin-left: 0; /* Align the table to the left */
-    width: 50%; /* Optional: Adjust as needed */
-    border-collapse: collapse;
-    padding: 2rem;
-}
+        }
+        .name{
+            color: #565555;
+            font-size: 28px;
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
@@ -220,7 +267,7 @@
                     <i class="fas fa-comment icn"></i> 
                 </div>
                 <div class="user-profile" onclick="toggleDropdown()">
-                <span class="user-name">Admin</span>
+                <span class="user-name">{{ username }} <strong> ({{role}})</strong></span>
                 <img src="{{ url_for('static', filename='user.png') }}" alt="Profile" class="profile-img">
                 <div class="dropdown-menu" id="dropdownMenu">
                     <a href="#">Profile</a>
@@ -236,47 +283,53 @@
         </div>
         
         <div class="middle-bar">
+            <a class="course" href="{{ url_for('main.student_dashboard', student_id=student_id) }}">My Courses</a>
         
         </div>
-        <div class="wrapper">
-        <div class="header"> All Students' Grades</div>
-        
-            <table >
-                <tr>
-                    <th>Student</th>
-                    <th>Course</th>
-                    <th>Grade</th>
-                    <th>Comments</th>
-                    <th>Actions</th>
-                </tr>
-                {% for username, course, grade, comments, grade_id in grades %}
-                <tr>
-                    <td>{{ username }}</td>
-                    <td>{{ course }}</td>
-                    <td>{{ grade }}</td>
-                    <td>{{ comments }}</td>
-                    <td>
-                        <a href="{{ url_for('main.edit_grade', grade_id=grade_id) }}">Edit</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </table>      
-    </div>
-    <!-- JavaScript to Toggle the Dropdown -->
-    <script>
-        function toggleDropdown() {
-            const dropdownMenu = document.getElementById('dropdownMenu');
-            dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
-        }
 
-        // Close the dropdown if clicked outside
-        window.onclick = function(event) {
-            const dropdownMenu = document.getElementById('dropdownMenu');
-            const userProfile = document.querySelector('.user-profile');
-            if (!userProfile.contains(event.target)) {
-                dropdownMenu.style.display = 'none';
-            }
+
+        <div class="profWrapper">
+            
+            <img src="{{ url_for('static', filename='user.png') }}" alt="Profile" class="profPic">
+            <span class="name">{{ username }} <strong> ({{role}})</strong></span>
+        </div>
+        <div class="grades-container">
+            <div class="grades">Grades</div>
+            <hr style="border: 1px solid rgb(231, 232, 237);  margin-bottom: 2rem;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>Grade</th>
+                        <th>Feedback</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course, grade, comment in courses %}
+                    <tr>
+                        <td>{{course}}</td> <!-- Static course for now -->
+                        <td>{{ grade  }}</td>
+                        <td>{{ comment | safe  }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+   <!-- JavaScript to Toggle the Dropdown -->
+   <script>
+    function toggleDropdown() {
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // Close the dropdown if clicked outside
+    window.onclick = function(event) {
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        const userProfile = document.querySelector('.user-profile');
+        if (!userProfile.contains(event.target)) {
+            dropdownMenu.style.display = 'none';
         }
-    </script>
-    </body>
-    </html>
+    }
+</script>
+</body>
+</html>
