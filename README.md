@@ -12,3 +12,7 @@ python run.py
 To run the Docker:
 - docker build -t flask_app .
 - docker run -p 5000:5000 flask_app
+
+To run in that env:
+python -m venv venv 
+.\venv\Scripts\Activate 

@@ -1,81 +1,365 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Grades</title>
+    <title>BUCourse</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background: #eeeef0;
         }
+
         .navbar {
-            background-color: #333;
-            overflow: hidden;
-            color: white;
-            padding: 2rem;
-            display: flex;
+            display: flexbox;
             justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            background-image: url("{{ url_for('static', filename='navbar.png') }}");
         }
+
+        .navbar img {
+            height: 90px;
+            /* Adjust logo size */
+            padding: 0.1rem;
+        }
+
+        .navbar .right-links {
+            display: flex;
+            align-items: center;
+        }
+
         .navbar a {
             color: white;
-            text-decoration: none;
-            margin: 0 1em;
+
+            margin-left: 20px;
+            font-size: 14px;
+            padding: 8px 10px;
+            background-color: #0073C1;
+            /* Blue for the button */
+            border-radius: 0px;
+            transition: background-color 0.3s ease;
         }
+
         .navbar a:hover {
-            text-decoration: underline;
+            background-color: #005A9E;
         }
+
+        /* Middle dark bar styling */
+        .middle-bar {
+            background-color: #3E4C56;
+            /* Slightly lighter dark bar */
+            height: 3rem;
+            display: flex;
+            align-items: center;
+
+        }
+
         .content {
             padding: 2em;
             text-align: center;
         }
+
         table {
             margin: 0 auto;
             width: 50%;
             border-collapse: collapse;
         }
-        table, th, td {
+
+        table,
+        th,
+        td {
             border: 1px solid #ddd;
         }
-        th, td {
+
+        th,
+        td {
             padding: 1em;
             text-align: center;
         }
+
         th {
             background-color: #f4f4f4;
         }
+
+        .initialBox {
+            margin-top: 1.5rem;
+            margin-left: 4rem;
+            margin-right: 4rem;
+            background-color: white;
+            padding-bottom: 5rem;
+
+        }
+
+        .loginText {
+            color: #3E4C56;
+            font-weight: 900;
+            padding-bottom: 1rem;
+
+        }
+
+        .cardBg {
+            background-color: #eeeef0;
+            border: none;
+            border-radius: 0rem;
+        }
+
+        .formInp {
+            padding-bottom: 2.5rem;
+        }
+
+        .inputPd {
+            padding-bottom: 1rem;
+        }
+
+        .inputStyl {
+            border: none;
+            border-radius: 0rem;
+            height: 2.6rem;
+        }
+
+        .lostPssw {
+            font-size: 14px;
+        }
+
+
+
+        /* User Profile Container */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            /* Adds space between elements */
+        }
+
+        /* Notification Badge */
+        .notification {
+            position: relative;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -8px;
+            left: 8px;
+            background-color: red;
+            color: white;
+            font-size: 8px;
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 3px 6px;
+        }
+
+        /* User Name Styling */
+        .user-name {
+            font-size: 16px;
+            color: #2c577b;
+            font-weight: bold;
+        }
+
+        /* Profile Image Styling */
+        .profile-img {
+            height: 40px;
+            width: 60px;
+            border-radius: 50%;
+            /* Makes the image circular */
+            border: 2px solid #afbaf0;
+
+        }
+
+        .icn {
+            color: #758e9f;
+        }
+
+        .dashboard {
+            padding: 20px;
+        }
+
+        /* Card Grid */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            justify-content: center;
+
+        }
+
+        .card {
+            border-radius: 0px;
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
+            height: 200px;
+            transition: transform 0.3s ease;
+            background-image: url("{{ url_for('static', filename='bg.png') }}");
+        }
+
+        .card p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .course-view {
+            padding-top: 0.5rem;
+            color: #333;
+            font-size: 16px;
+            padding-left: 0.5rem;
+
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: row;
+            background-color: #e4e7e9;
+            height: 40px;
+            margin-bottom: 20px;
+        }
+
+        .star {
+            background-color: #234275;
+            font-size: 36px;
+            color: white;
+            width: 40px;
+            text-align: center;
+        }
+
+        .card-wrapper {
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .course {
+            background-color: white;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #434343;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 60px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000;
+            width: 150px;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 15px;
+            color: #333;
+            text-decoration: none;
+            background-color: white;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f4f4f4;
+        }
+
+        .dropdown-menu hr {
+            margin: 0;
+            border: none;
+            border-top: 1px solid #ddd;
+        }
+
+        .user-profile {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
+
 <body>
-    <div class="navbar">
-        <div>
-            <a href="#">Home</a>
-            <a href="#">Grades</a>
-            <a href="#">Profile</a>
-        </div>
-        <div>
-            <a href="/logout">Logout</a>
-        </div>
-    </div>
+    <div class="initialBox">
+        <div class="navbar">
 
-    <!-- Grades Content -->
-    <div class="content">
-        <h1>Welcome, {{ username }}!</h1>
-        <h2>Your Grades</h2>
-        <table>
-            <tr>
-                <th>Subject</th>
-                <th>Grade</th>
-                <th>Comments</th>
+            <div>
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+            </div>
 
-            </tr>
-            <tr>
-                <td>Math</td>
-                <td>{{ grade }}</td>
-                <td>{{ comments }}</td>
-            </tr>
-        </table>
-    </div>
+            <div class="user-profile">
+
+                <div class="notification">
+                    <i class="fas fa-bell icn"></i>
+                    <span class="notification-badge">12</span>
+                </div>
+                <div>
+                    <i class="fas fa-comment icn"></i>
+                </div>
+                <div class="user-profile" onclick="toggleDropdown()">
+                    <span class="user-name">{{ username }} <strong> ({{role}})</strong></span>
+                    <img src="{{ url_for('static', filename='user.png') }}" alt="Profile" class="profile-img">
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="#">Profile</a>
+                        <a href="{{ url_for('main.grades', student_id=student_id) }}">Grades</a>
+                        <a href="#">Calendar</a>
+                        <a href="#">Private files</a>
+                        <a href="#">Preferences</a>
+                        <hr>
+                        <a href="/logout"><i class="fas fa-sign-out-alt"></i> Log out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="middle-bar">
+
+        </div>
+
+        <div class="dashboard">
+            <div class="wrapper">
+                <div class="star">*</div>
+                <div class="course-view">Course overview </div>
+            </div>
+            <div style="cursor: pointer;" class="card-container">
+
+                {% for course in courses %}
+                <div class="card-wrapper" style="cursor: pointer;" onclick="redirectToResource('{{ loop.index0 }}')">
+                    <div class="card"></div>
+                    <div class="course">{{ course[0] }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- JavaScript to Toggle the Dropdown -->
+        <script>
+            function toggleDropdown() {
+                const dropdownMenu = document.getElementById('dropdownMenu');
+                dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
+            }
+
+            window.onclick = function (event) {
+                const dropdownMenu = document.getElementById('dropdownMenu');
+                const userProfile = document.querySelector('.user-profile');
+                if (!userProfile.contains(event.target)) {
+                    dropdownMenu.style.display = 'none';
+                }
+            }
+            function redirectToResource(index) {
+                index = parseInt(index, 10);
+
+                if (index % 2 === 0) {
+                    window.location.href = "{{ url_for('main.upload_resource', student_id=student_id) }}";
+                } else {
+                    window.location.href = "{{ url_for('main.upload_file', student_id=student_id) }}";
+                }
+            }
+        </script>
 </body>
+
 </html>

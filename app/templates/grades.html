@@ -132,42 +132,12 @@
 
 
 
-        .dropdown-menu {
-            position: absolute;
-            top: 60px;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            display: none;
-            z-index: 1000;
-            width: 150px;
-        }
-
-        .dropdown-menu a {
-            display: block;
-            padding: 10px 15px;
-            color: #333;
-            text-decoration: none;
-            background-color: white;
-        }
-
-        .dropdown-menu a:hover {
-            background-color: #f4f4f4;
-        }
-
-        .dropdown-menu hr {
-            margin: 0;
-            border: none;
-            border-top: 1px solid #ddd;
-        }
-
+        /* User Profile Container */
         .user-profile {
-            position: relative;
             display: flex;
             align-items: center;
             gap: 10px;
-            cursor: pointer;
+            /* Adds space between elements */
         }
 
         /* Notification Badge */
@@ -208,26 +178,107 @@
             color: #758e9f;
         }
 
-        .header {
-            color: #6e6f6f;
-            padding-bottom: 1rem;
-            font-size: 28px;
-            font-weight: 600;
+        .grades-container {
+
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+
         }
 
-        .wrapper {
-            display: flex;
-            flex-direction: column;
-            padding: 2rem;
+        h2 {
+            margin-bottom: 20px;
         }
 
         table {
-            margin-left: 0;
-            /* Align the table to the left */
-            width: 50%;
-            /* Optional: Adjust as needed */
+            width: 100%;
             border-collapse: collapse;
-            padding: 2rem;
+        }
+
+        table th,
+        table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+        }
+
+        .course {
+            color: white;
+            text-align: center;
+            margin-left: 10px;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 60px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000;
+            width: 150px;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 15px;
+            color: #333;
+            text-decoration: none;
+            background-color: white;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f4f4f4;
+        }
+
+        .dropdown-menu hr {
+            margin: 0;
+            border: none;
+            border-top: 1px solid #ddd;
+        }
+
+        .user-profile {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .grades {
+            font-size: 20px;
+            color: #707072;
+            font-weight: 700;
+        }
+
+        .profWrapper {
+            height: 8rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .profPic {
+            height: 100px;
+            width: 70px;
+            border-radius: 50%;
+            /* Makes the image circular */
+            border: 2px solid #afbaf0;
+            margin-right: 1rem;
+            margin-left: 1rem;
+
+        }
+
+        .name {
+            color: #565555;
+            font-size: 28px;
+            font-weight: 700;
         }
     </style>
 </head>
@@ -250,7 +301,7 @@
                     <i class="fas fa-comment icn"></i>
                 </div>
                 <div class="user-profile" onclick="toggleDropdown()">
-                    <span class="user-name">Admin</span>
+                    <span class="user-name">{{ username }} <strong> ({{role}})</strong></span>
                     <img src="{{ url_for('static', filename='user.png') }}" alt="Profile" class="profile-img">
                     <div class="dropdown-menu" id="dropdownMenu">
                         <a href="#">Profile</a>
@@ -266,30 +317,36 @@
         </div>
 
         <div class="middle-bar">
+            <a class="course" href="{{ url_for('main.student_dashboard', student_id=student_id) }}">My Courses</a>
 
         </div>
-        <div class="wrapper">
-            <div class="header"> All Students' Grades</div>
 
+
+        <div class="profWrapper">
+
+            <img src="{{ url_for('static', filename='user.png') }}" alt="Profile" class="profPic">
+            <span class="name">{{ username }} <strong> ({{role}})</strong></span>
+        </div>
+        <div class="grades-container">
+            <div class="grades">Grades</div>
+            <hr style="border: 1px solid rgb(231, 232, 237);  margin-bottom: 2rem;">
             <table>
-                <tr>
-                    <th>Student</th>
-                    <th>Course</th>
-                    <th>Grade</th>
-                    <th>Comments</th>
-                    <th>Actions</th>
-                </tr>
-                {% for username, course, grade, comments, grade_id in grades %}
-                <tr>
-                    <td>{{ username }}</td>
-                    <td>{{ course }}</td>
-                    <td>{{ grade }}</td>
-                    <td>{{ comments }}</td>
-                    <td>
-                        <a href="{{ url_for('main.edit_grade', grade_id=grade_id) }}">Edit</a>
-                    </td>
-                </tr>
-                {% endfor %}
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>Grade</th>
+                        <th>Feedback</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course, grade, comment in courses %}
+                    <tr>
+                        <td>{{course}}</td> <!-- Static course for now -->
+                        <td>{{ grade }}</td>
+                        <td>{{ comment }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
             </table>
         </div>
         <!-- JavaScript to Toggle the Dropdown -->
