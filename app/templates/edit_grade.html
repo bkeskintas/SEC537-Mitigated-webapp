@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,7 @@
             padding: 0;
             background: #eeeef0;
         }
+
         .navbar {
             display: flexbox;
             justify-content: space-between;
@@ -25,7 +27,8 @@
         }
 
         .navbar img {
-            height: 90px; /* Adjust logo size */
+            height: 90px;
+            /* Adjust logo size */
             padding: 0.1rem;
         }
 
@@ -36,90 +39,107 @@
 
         .navbar a {
             color: white;
-           
+
             margin-left: 20px;
             font-size: 14px;
             padding: 8px 10px;
-            background-color: #0073C1; /* Blue for the button */
+            background-color: #0073C1;
+            /* Blue for the button */
             border-radius: 0px;
             transition: background-color 0.3s ease;
         }
 
         .navbar a:hover {
-            background-color: #005A9E; 
+            background-color: #005A9E;
         }
 
         /* Middle dark bar styling */
         .middle-bar {
-            background-color: #3E4C56; /* Slightly lighter dark bar */
+            background-color: #3E4C56;
+            /* Slightly lighter dark bar */
             height: 3rem;
             display: flex;
             align-items: center;
-           
-        }           
+
+        }
+
         .content {
             padding: 2em;
             text-align: center;
         }
+
         table {
             margin: 0 auto;
             width: 50%;
             border-collapse: collapse;
         }
-        table, th, td {
+
+        table,
+        th,
+        td {
             border: 1px solid #ddd;
         }
-        th, td {
+
+        th,
+        td {
             padding: 1em;
             text-align: center;
         }
+
         th {
             background-color: #f4f4f4;
         }
-        .initialBox{
+
+        .initialBox {
             margin-top: 1.5rem;
             margin-left: 4rem;
             margin-right: 4rem;
             background-color: white;
             padding-bottom: 5rem;
-            
+
         }
-        .loginText{
-            color:#3E4C56;
-            font-weight:900;
+
+        .loginText {
+            color: #3E4C56;
+            font-weight: 900;
             padding-bottom: 1rem;
 
         }
-        .cardBg{
+
+        .cardBg {
             background-color: #eeeef0;
             border: none;
             border-radius: 0rem;
         }
-        .formInp{
+
+        .formInp {
             padding-bottom: 2.5rem;
         }
-        .inputPd{
+
+        .inputPd {
             padding-bottom: 1rem;
         }
-        .inputStyl{
+
+        .inputStyl {
             border: none;
             border-radius: 0rem;
             height: 2.6rem;
         }
-        .lostPssw{
+
+        .lostPssw {
             font-size: 14px;
         }
-  
+
 
 
         .dropdown-menu {
             position: absolute;
-            top: 60px; 
+            top: 60px;
             background-color: white;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            display: none; 
+            display: none;
             z-index: 1000;
             width: 150px;
         }
@@ -141,6 +161,7 @@
             border: none;
             border-top: 1px solid #ddd;
         }
+
         .user-profile {
             position: relative;
             display: flex;
@@ -148,59 +169,68 @@
             gap: 10px;
             cursor: pointer;
         }
-    /* Notification Badge */
-    .notification {
-        position: relative;
-    }
 
-    .notification-badge {
-        position: absolute;
-        top: -8px;
-        left: 8px;
-        background-color: red;
-        color: white;
-        font-size: 8px;
-        font-weight: bold;
-        border-radius: 50%;
-        padding: 3px 6px;
-    }
+        /* Notification Badge */
+        .notification {
+            position: relative;
+        }
 
-    /* User Name Styling */
-    .user-name {
-        font-size: 16px;
-        color: #2c577b;
-        font-weight: bold;
-    }
+        .notification-badge {
+            position: absolute;
+            top: -8px;
+            left: 8px;
+            background-color: red;
+            color: white;
+            font-size: 8px;
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 3px 6px;
+        }
 
-    /* Profile Image Styling */
-    .profile-img {
-        height: 40px;
-        width: 60px;
-        border-radius: 50%; /* Makes the image circular */
-        border: 2px solid #afbaf0;
+        /* User Name Styling */
+        .user-name {
+            font-size: 16px;
+            color: #2c577b;
+            font-weight: bold;
+        }
 
-    }
-    .icn{
-        color: #758e9f;
-    }
-    .header{
-        color:#6e6f6f;
-        padding-bottom: 1rem;
-        font-size: 28px;
-        font-weight: 600;
-    }
-    .wrapper{
-        display: flex;
-        flex-direction: column;
-        padding: 2rem;
-    }
-    table {
-    margin-left: 0; /* Align the table to the left */
-    width: 50%; /* Optional: Adjust as needed */
-    border-collapse: collapse;
-    padding: 2rem;
-    }
-    form {
+        /* Profile Image Styling */
+        .profile-img {
+            height: 40px;
+            width: 60px;
+            border-radius: 50%;
+            /* Makes the image circular */
+            border: 2px solid #afbaf0;
+
+        }
+
+        .icn {
+            color: #758e9f;
+        }
+
+        .header {
+            color: #6e6f6f;
+            padding-bottom: 1rem;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+        }
+
+        table {
+            margin-left: 0;
+            /* Align the table to the left */
+            width: 50%;
+            /* Optional: Adjust as needed */
+            border-collapse: collapse;
+            padding: 2rem;
+        }
+
+        form {
             background-color: #d2d6d6;
             margin: 30px 20px;
             padding: 20px;
@@ -264,6 +294,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="initialBox">
         <div class="navbar">
@@ -271,63 +302,63 @@
             <div>
                 <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
             </div>
-        
+
             <div class="user-profile">
-                
+
                 <div class="notification">
                     <i class="fas fa-bell icn"></i>
                     <span class="notification-badge">12</span>
                 </div>
-                <div >
-                    <i class="fas fa-comment icn"></i> 
+                <div>
+                    <i class="fas fa-comment icn"></i>
                 </div>
                 <div class="user-profile" onclick="toggleDropdown()">
-                <span class="user-name">Admin</span>
-                <img src="{{ url_for('static', filename='user.png') }}" alt="Profile" class="profile-img">
-                <div class="dropdown-menu" id="dropdownMenu">
-                    <a href="#">Profile</a>
-                    <a href="{{ url_for('main.grades', student_id=student_id) }}">Grades</a>
-                    <a href="#">Calendar</a>
-                    <a href="#">Private files</a>
-                    <a href="#">Preferences</a>
-                    <hr>
-                    <a href="/logout"><i class="fas fa-sign-out-alt"></i> Log out</a>
-                </div>
+                    <span class="user-name">Admin</span>
+                    <img src="{{ url_for('static', filename='user.png') }}" alt="Profile" class="profile-img">
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="#">Profile</a>
+                        <a href="{{ url_for('main.grades', student_id=student_id) }}">Grades</a>
+                        <a href="#">Calendar</a>
+                        <a href="#">Private files</a>
+                        <a href="#">Preferences</a>
+                        <hr>
+                        <a href="/logout"><i class="fas fa-sign-out-alt"></i> Log out</a>
+                    </div>
                 </div>
             </div>
         </div>
-        
+
         <div class="middle-bar">
-        
+
         </div>
-     <div class="wrapper">
+        <div class="wrapper">
             <div class="header">Edit Grade for {{ grade_data[0] }}</div>
             <form method="POST">
                 <label for="grade">Grade:</label><br>
                 <input type="text" id="grade" name="grade" value="{{ grade_data[1] }}" required><br><br>
-                
+
                 <label for="comments">Comments:</label><br>
                 <textarea id="comments" name="comments" required>{{ grade_data[2] }}</textarea><br><br>
-                
+
                 <button type="submit">Save Changes</button>
             </form>
         </div>
-    <!-- JavaScript to Toggle the Dropdown -->
-    <script>
-        function toggleDropdown() {
-            const dropdownMenu = document.getElementById('dropdownMenu');
-            dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
-        }
-
-        // Close the dropdown if clicked outside
-        window.onclick = function(event) {
-            const dropdownMenu = document.getElementById('dropdownMenu');
-            const userProfile = document.querySelector('.user-profile');
-            if (!userProfile.contains(event.target)) {
-                dropdownMenu.style.display = 'none';
+        <!-- JavaScript to Toggle the Dropdown -->
+        <script>
+            function toggleDropdown() {
+                const dropdownMenu = document.getElementById('dropdownMenu');
+                dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
             }
-        }
-    </script>
+
+            // Close the dropdown if clicked outside
+            window.onclick = function (event) {
+                const dropdownMenu = document.getElementById('dropdownMenu');
+                const userProfile = document.querySelector('.user-profile');
+                if (!userProfile.contains(event.target)) {
+                    dropdownMenu.style.display = 'none';
+                }
+            }
+        </script>
 </body>
 
 

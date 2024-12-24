@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
             margin: 0;
             padding: 0;
         }
+
         .navbar {
             background-color: #2d70ec;
             overflow: hidden;
@@ -20,49 +22,60 @@
             display: flex;
             justify-content: space-between;
         }
+
         .navbar a {
             color: white;
             text-decoration: none;
             margin: 0 1em;
         }
+
         .navbar a:hover {
             text-decoration: underline;
         }
+
         .content {
             padding: 2em;
             text-align: center;
         }
+
         table {
             margin: 0 auto;
             width: 50%;
             border-collapse: collapse;
         }
-        table, th, td {
+
+        table,
+        th,
+        td {
             border: 1px solid #ddd;
         }
-        th, td {
+
+        th,
+        td {
             padding: 1em;
             text-align: center;
         }
+
         th {
             background-color: #f4f4f4;
         }
     </style>
 </head>
+
 <body>
     <div class="navbar">
         <div>
             {% if 'username' in session %}
-                <a href="/dashboard">Dashboard</a>
+            <a href="/dashboard">Dashboard</a>
             {% endif %}
         </div>
         <div>
             {% if 'username' in session %}
-                <!-- Show Logout for logged-in users -->
-                <a href="{{ url_for('main.logout') }}">Logout</a>
+            <!-- Show Logout for logged-in users -->
+            <a href="{{ url_for('main.logout') }}">Logout</a>
             {% else %}
-                <!-- Show Register and Login for non-logged-in users -->
-                <a href="{{ url_for('main.login') }}">Login</a>
+            <!-- Show Register and Login for non-logged-in users -->
+            <a href="{{ url_for('main.login') }}">Login</a>
             {% endif %}
         </div>
     </div>
@@ -81,9 +94,9 @@
                                 <label for="username">Username</label>
                                 {{ form.username(class="form-control", placeholder="Enter your username") }}
                                 {% if form.username.errors %}
-                                    <div class="text-danger">
-                                        {{ form.username.errors[0] }}
-                                    </div>
+                                <div class="text-danger">
+                                    {{ form.username.errors[0] }}
+                                </div>
                                 {% endif %}
                             </div>
 
@@ -92,9 +105,9 @@
                                 <label for="password">Password</label>
                                 {{ form.password(class="form-control", placeholder="Enter a strong password") }}
                                 {% if form.password.errors %}
-                                    <div class="text-danger">
-                                        {{ form.password.errors[0] }}
-                                    </div>
+                                <div class="text-danger">
+                                    {{ form.password.errors[0] }}
+                                </div>
                                 {% endif %}
                             </div>
 
@@ -103,9 +116,9 @@
                                 <label for="confirm_password">Confirm Password</label>
                                 {{ form.confirm_password(class="form-control", placeholder="Confirm your password") }}
                                 {% if form.confirm_password.errors %}
-                                    <div class="text-danger">
-                                        {{ form.confirm_password.errors[0] }}
-                                    </div>
+                                <div class="text-danger">
+                                    {{ form.confirm_password.errors[0] }}
+                                </div>
                                 {% endif %}
                             </div>
 
@@ -118,6 +131,7 @@
         </div>
     </div>
 
-   
+
 </body>
+
 </html>

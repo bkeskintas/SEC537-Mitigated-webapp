@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@
             padding: 0;
             background: #eeeef0;
         }
+
         .navbar {
             display: flexbox;
             justify-content: space-between;
@@ -23,7 +25,8 @@
         }
 
         .navbar img {
-            height: 90px; /* Adjust logo size */
+            height: 90px;
+            /* Adjust logo size */
             padding: 0.1rem;
         }
 
@@ -34,82 +37,99 @@
 
         .navbar a {
             color: white;
-           
+
             margin-left: 20px;
             font-size: 14px;
             padding: 8px 10px;
-            background-color: #0073C1; /* Blue for the button */
+            background-color: #0073C1;
+            /* Blue for the button */
             border-radius: 0px;
             transition: background-color 0.3s ease;
         }
 
         .navbar a:hover {
-            background-color: #005A9E; 
+            background-color: #005A9E;
         }
 
         /* Middle dark bar styling */
         .middle-bar {
-            background-color: #3E4C56; /* Slightly lighter dark bar */
+            background-color: #3E4C56;
+            /* Slightly lighter dark bar */
             height: 3rem;
             display: flex;
             align-items: center;
-           
-        }           
+
+        }
+
         .content {
             padding: 2em;
             text-align: center;
         }
+
         table {
             margin: 0 auto;
             width: 50%;
             border-collapse: collapse;
         }
-        table, th, td {
+
+        table,
+        th,
+        td {
             border: 1px solid #ddd;
         }
-        th, td {
+
+        th,
+        td {
             padding: 1em;
             text-align: center;
         }
+
         th {
             background-color: #f4f4f4;
         }
-        .initialBox{
+
+        .initialBox {
             margin-top: 1.5rem;
             margin-left: 4rem;
             margin-right: 4rem;
             background-color: white;
             padding-bottom: 5rem;
-            
+
         }
-        .loginText{
-            color:#3E4C56;
+
+        .loginText {
+            color: #3E4C56;
             font-weight: bold;
             padding-bottom: 1rem;
 
         }
-        .cardBg{
+
+        .cardBg {
             background-color: #eeeef0;
             border: none;
             border-radius: 0rem;
         }
-        .formInp{
+
+        .formInp {
             padding-bottom: 2.5rem;
         }
-        .inputPd{
+
+        .inputPd {
             padding-bottom: 1rem;
         }
-        .inputStyl{
+
+        .inputStyl {
             border: none;
             border-radius: 0rem;
             height: 2.6rem;
         }
-        .lostPssw{
+
+        .lostPssw {
             font-size: 14px;
         }
-      
     </style>
 </head>
+
 <body>
     <div class="initialBox">
         <div class="navbar">
@@ -117,14 +137,14 @@
             <div>
                 <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
             </div>
-        
+
             <div class="right-links">
                 <a href="/">Login</a>
             </div>
         </div>
-        
+
         <div class="middle-bar">
-        
+
         </div>
 
         <div class="container mt-5">
@@ -134,17 +154,19 @@
                         <h3>Log in to Vulnerable BUCourse</h3>
                     </div>
                     <div class="card shadow-sm cardBg cardBdy">
-                        
+
                         <div class="card-body ">
                             <form method="POST" action="/login">
                                 <div class="formInp">
                                     <div class="form-group inputPd">
-                                        
-                                        <input type="text" placeholder="Username" class="form-control inputStyl" id="username" name="username" required>
+
+                                        <input type="text" placeholder="Username" class="form-control inputStyl"
+                                            id="username" name="username" required>
                                     </div>
                                     <div class="form-group">
-                                       
-                                        <input type="password" placeholder="Password"  class="form-control inputStyl" id="password" name="password" required>
+
+                                        <input type="password" placeholder="Password" class="form-control inputStyl"
+                                            id="password" name="password" required>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-block">Login</button>
@@ -157,5 +179,5 @@
         </div>
     </div>
 </body>
-</html>
 
+</html>

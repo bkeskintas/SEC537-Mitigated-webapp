@@ -352,7 +352,7 @@
             }
             function redirectToResource(index) {
                 index = parseInt(index, 10);
-                
+
                 if (index % 2 === 0) {
                     window.location.href = "{{ url_for('main.upload_resource', student_id=student_id) }}";
                 } else {
