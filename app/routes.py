@@ -6,6 +6,7 @@ from datetime import datetime
 import logging
 import requests
 from werkzeug.security import check_password_hash
+from functools import wraps
 
 main = Blueprint('main', __name__)
 
@@ -16,6 +17,38 @@ logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s 
 ALLOWED_EXTENSIONS = {'pdf', 'docx', 'png'}
 MAX_FILE_SIZE = 10 * 1024 * 1024  # 10 MB
 
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get('username'):
+            abort(401)
+        return f(*args, **kwargs)
+    return decorated_function
+
+def is_user(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if session.get('role') != 'student':
+            abort(403)
+        return f(*args, **kwargs)
+    return decorated_function
+
+def is_admin(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if session.get('role') != 'admin':
+            abort(403)
+        return f(*args, **kwargs)
+    return decorated_function
+
+def is_current_user(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'student_id' in kwargs and str(session.get('student_id')) != kwargs['student_id']:
+            abort(403)
+        return f(*args, **kwargs)
+    return decorated_function
 
 def allowed_file(filename):
     """Check if a file is allowed based on its extension."""
@@ -41,7 +74,8 @@ def login():
 
     if user and check_password_hash(user[2], password):  # user[2] is the hashed password
         session['username'] = user[1]  # Store username in session
-        session['role'] = user[3]      # Store role in session
+        session['role'] = user[3]
+        session['student_id'] = user[0] # Store role in session
         logging.info(f"Login successful for user: {username}")
 
         if user[3] == 'admin':
@@ -54,10 +88,10 @@ def login():
 
 
 @main.route('/student/<student_id>')
+@login_required
+@is_user
+@is_current_user
 def student_dashboard(student_id):
-    if not session.get('username') or session.get('role') != 'student':
-        abort(403)
-
     conn = sqlite3.connect('normal.db')
     c = conn.cursor()
     # Parameterized query to fetch grades for the logged-in student
@@ -69,10 +103,10 @@ def student_dashboard(student_id):
 
 
 @main.route('/student/<student_id>/grades')
+@login_required
+@is_user
+@is_current_user
 def grades(student_id):
-    if not session.get('username') or session.get('role') != 'student':
-        abort(403)
-
     conn = sqlite3.connect('normal.db')
     c = conn.cursor()
     c.execute("SELECT course, grade, comments FROM grades WHERE student_id=?", (student_id,))
@@ -83,10 +117,9 @@ def grades(student_id):
 
 
 @main.route('/admin')
+@login_required
+@is_admin
 def admin_dashboard():
-    if not session.get('username') or session.get('role') != 'admin':
-        abort(403)
-
     conn = sqlite3.connect('normal.db')
     c = conn.cursor()
     c.execute('''SELECT u.username, g.course, g.grade, g.comments, g.id 
@@ -98,10 +131,9 @@ def admin_dashboard():
 
 
 @main.route('/admin/edit/<grade_id>', methods=['GET', 'POST'])
+@login_required
+@is_admin
 def edit_grade(grade_id):
-    if not session.get('username') or session.get('role') != 'admin':
-        abort(403)
-
     conn = sqlite3.connect('normal.db')
     c = conn.cursor()
 
@@ -122,10 +154,10 @@ def edit_grade(grade_id):
 
 
 @main.route('/student/<student_id>/upload_resource', methods=['GET', 'POST'])
+@login_required
+@is_user
+@is_current_user
 def upload_resource(student_id):
-    if not session.get('username') or session.get('role') != 'student':
-        abort(403)
-
     if request.method == 'POST':
         url = request.form.get('url')
 
@@ -159,10 +191,10 @@ def logout():
 
 
 @main.route('/student/<student_id>/upload', methods=['GET', 'POST'])
+@login_required
+@is_user
+@is_current_user
 def upload_file(student_id):
-    if not session.get('username') or session.get('role') != 'student':
-        abort(403)
-
     if request.method == 'POST':
         uploaded_file = request.files.get('file')
 
@@ -180,3 +212,4 @@ def upload_file(student_id):
         return "Invalid file type or no file uploaded!", 400
 
     return render_template('upload_project.html', student_id=student_id)
+
