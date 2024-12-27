@@ -24,6 +24,15 @@ def init_db():
         FOREIGN KEY(student_id) REFERENCES users(id)
     )''')
 
+    c.execute('''CREATE TABLE IF NOT EXISTS assignments (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,                
+        student_id INTEGER NOT NULL,                         
+        course TEXT NOT NULL CHECK(course <> ''),            
+        file_data BLOB NOT NULL,                             
+        file_name TEXT NOT NULL CHECK(file_name <> ''),      
+        FOREIGN KEY(student_id) REFERENCES users(id)      
+    )''')
+
     #check if users table is empty,  if not it won't do this
     c.execute('SELECT COUNT(*) FROM users')
     if c.fetchone()[0] == 0:  #only insert if the table is empty

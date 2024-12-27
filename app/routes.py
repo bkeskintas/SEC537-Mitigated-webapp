@@ -1,6 +1,7 @@
 import os
+import pickle
 import sqlite3
-from flask import Blueprint, current_app, render_template, request, redirect, url_for, session, abort
+from flask import Blueprint, current_app, render_template, request, redirect, url_for, session, abort, flash
 from werkzeug.utils import secure_filename
 from datetime import datetime
 import logging
@@ -86,6 +87,33 @@ def login():
         logging.warning(f"Failed login attempt for username: {username}")
         return "Invalid credentials", 401
 
+#For Identificaiton and Authentication Failures -> users can set passw like '123'
+@main.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        confirm_password = request.form['confirm_password']
+        
+        if password != confirm_password:
+            flash("Passwords do not match", "danger")
+            return render_template('register.html')
+        
+        try:
+            with sqlite3.connect('normal.db') as conn:
+                c = conn.cursor()
+                c.execute("INSERT INTO users (username, password, role) VALUES (?, ?, ?)", (username, password, 'student'))
+                conn.commit()
+            flash("Registration successful! You can now log in.", "success")
+            return redirect(url_for('main.index'))
+        except sqlite3.IntegrityError:
+            flash("Username already exists. Please choose another one.", "danger")
+            return render_template('register.html')
+        except sqlite3.OperationalError:
+            flash("Database is currently locked. Please try again later.", "danger")
+            return render_template('register.html')
+
+    return render_template('register.html')
 
 @main.route('/student/<student_id>')
 @login_required
@@ -94,13 +122,13 @@ def login():
 def student_dashboard(student_id):
     conn = sqlite3.connect('normal.db')
     c = conn.cursor()
+    role = session['role']
     # Parameterized query to fetch grades for the logged-in student
     c.execute("SELECT course, grade, comments FROM grades WHERE student_id=?", (student_id,))
     courses = c.fetchall()
     conn.close()
 
-    return render_template('student_dashboard.html', courses=courses, username=session['username'], student_id=student_id)
-
+    return render_template('student_dashboard.html', courses=courses, username=session['username'], student_id=student_id, role=role)
 
 @main.route('/student/<student_id>/grades')
 @login_required
@@ -189,6 +217,68 @@ def logout():
     logging.info(f"User logged out.")
     return redirect("/")
 
+#FILE SIZE MUST BE ADDED HEREEEE
+#VULNERABLE LIKE THIS
+#For SSRF -> DOS Example && Software and Data Integrity Failures -> Insecure Deserialization
+@main.route('/student/<student_id>/upload_assignment/<course>', methods=['GET', 'POST'])
+@login_required
+@is_user
+@is_current_user
+def upload_assignment(student_id, course):
+    username = session.get('username')
+    role = session.get('role')
+
+    conn = sqlite3.connect('normal.db')
+    c = conn.cursor()
+
+    # Check if an assignment already exists for this student and course
+    c.execute("SELECT file_name, file_data FROM assignments WHERE student_id=? AND course=?", (student_id, course))
+    existing_assignment = c.fetchone()
+
+    file_name = None
+    deserialized_data = None
+    if existing_assignment:
+        file_name = existing_assignment[0]  # Existing file name
+        try:
+            # Insecure Deserialization
+            deserialized_data = pickle.loads(existing_assignment[1])
+        except Exception as e:
+            deserialized_data = f"Error deserializing data: {str(e)}"
+
+    if request.method == 'POST':
+        uploaded_file = request.files.get('file')
+
+        # Vulnerable: No size or type validation (SSRF)
+        if uploaded_file:
+            # Serialize file data and store it in the database (Insecure Serialization)
+            serialized_data = pickle.dumps(uploaded_file.read())
+            file_name = uploaded_file.filename
+            if existing_assignment:
+                # Update existing assignment
+                c.execute("UPDATE assignments SET file_data=?, file_name=? WHERE student_id=? AND course=?", 
+                          (serialized_data, file_name, student_id, course))
+            else:
+                # New assignment
+                c.execute("INSERT INTO assignments (student_id, course, file_data, file_name) VALUES (?, ?, ?, ?)", 
+                          (student_id, course, serialized_data, file_name))
+            conn.commit()
+            conn.close()
+            return render_template('successfully_upload.html', 
+                                   course=course, 
+                                   student_id=student_id, 
+                                   username=username, 
+                                   role=role,)
+
+        return "No file uploaded!", 400
+
+    conn.close()
+    return render_template('upload_assignment.html', 
+                           course=course, 
+                           student_id=student_id, 
+                           username=username, 
+                           role=role, 
+                           file_name=file_name, 
+                           deserialized_data=deserialized_data)
 
 @main.route('/student/<student_id>/upload', methods=['GET', 'POST'])
 @login_required

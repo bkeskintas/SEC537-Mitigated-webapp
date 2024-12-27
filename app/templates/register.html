@@ -1,36 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Student Grade System</title>
-    <!-- Original Bootstrap CSS Reference -->
+    <title>Register</title>
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background: #eeeef0;
         }
 
         .navbar {
-            background-color: #2d70ec;
-            overflow: hidden;
-            color: white;
-            padding: 2rem;
-            display: flex;
+            display: flexbox;
             justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            background-image: url("{{ url_for('static', filename='navbar.png') }}");
+        }
+
+        .navbar img {
+            height: 90px;
+            /* Adjust logo size */
+            padding: 0.1rem;
+        }
+
+        .navbar .right-links {
+            display: flex;
+            align-items: center;
         }
 
         .navbar a {
             color: white;
-            text-decoration: none;
-            margin: 0 1em;
+
+            margin-left: 20px;
+            font-size: 14px;
+            padding: 8px 10px;
+            background-color: #0073C1;
+            /* Blue for the button */
+            border-radius: 0px;
+            transition: background-color 0.3s ease;
         }
 
         .navbar a:hover {
-            text-decoration: underline;
+            background-color: #005A9E;
+        }
+
+        /* Middle dark bar styling */
+        .middle-bar {
+            background-color: #3E4C56;
+            /* Slightly lighter dark bar */
+            height: 3rem;
+            display: flex;
+            align-items: center;
+
         }
 
         .content {
@@ -59,79 +86,95 @@
         th {
             background-color: #f4f4f4;
         }
+
+        .initialBox {
+            margin-top: 1.5rem;
+            margin-left: 4rem;
+            margin-right: 4rem;
+            background-color: white;
+            padding-bottom: 5rem;
+
+        }
+
+        .loginText {
+            color: #3E4C56;
+            font-weight: bold;
+            padding-bottom: 1rem;
+
+        }
+
+        .cardBg {
+            background-color: #eeeef0;
+            border: none;
+            border-radius: 0rem;
+        }
+
+        .formInp {
+            padding-bottom: 2.5rem;
+        }
+
+        .inputPd {
+            padding-bottom: 1rem;
+        }
+
+        .inputStyl {
+            border: none;
+            border-radius: 0rem;
+            height: 2.6rem;
+        }
+
+        .lostPssw {
+            font-size: 14px;
+        }
     </style>
 </head>
 
 <body>
-    <div class="navbar">
-        <div>
-            {% if 'username' in session %}
-            <a href="/dashboard">Dashboard</a>
-            {% endif %}
-        </div>
-        <div>
-            {% if 'username' in session %}
-            <!-- Show Logout for logged-in users -->
-            <a href="{{ url_for('main.logout') }}">Logout</a>
-            {% else %}
-            <!-- Show Register and Login for non-logged-in users -->
-            <a href="{{ url_for('main.login') }}">Login</a>
-            {% endif %}
-        </div>
-    </div>
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card shadow-lg">
-                    <div class="card-header bg-primary text-white text-center">
-                        <h3>Register</h3>
-                    </div>
-                    <div class="card-body">
-                        <form method="POST">
+    <div class="initialBox">
+        <div class="navbar">
 
-                            <!-- Username Field -->
-                            <div class="form-group">
-                                <label for="username">Username</label>
-                                {{ form.username(class="form-control", placeholder="Enter your username") }}
-                                {% if form.username.errors %}
-                                <div class="text-danger">
-                                    {{ form.username.errors[0] }}
-                                </div>
-                                {% endif %}
-                            </div>
+            <div>
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+            </div>
 
-                            <!-- Password Field -->
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                {{ form.password(class="form-control", placeholder="Enter a strong password") }}
-                                {% if form.password.errors %}
-                                <div class="text-danger">
-                                    {{ form.password.errors[0] }}
-                                </div>
-                                {% endif %}
-                            </div>
-
-                            <!-- Confirm Password Field -->
-                            <div class="form-group">
-                                <label for="confirm_password">Confirm Password</label>
-                                {{ form.confirm_password(class="form-control", placeholder="Confirm your password") }}
-                                {% if form.confirm_password.errors %}
-                                <div class="text-danger">
-                                    {{ form.confirm_password.errors[0] }}
-                                </div>
-                                {% endif %}
-                            </div>
-
-                            <!-- Submit Button -->
-                            <button type="submit" class="btn btn-success btn-block">Register</button>
-                        </form>
-                    </div>
-                </div>
+            <div class="right-links">
+                <a href="/">Login</a>
             </div>
         </div>
+
+        <div class="middle-bar">
+
+        </div>
+        <div class="container mt-5">
+            <h2 class="text-center">Register</h2>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <form method="POST" action="{{ url_for('main.register') }}">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="confirm_password" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Register</button>
+            </form>
+            <p class="text-center mt-3">
+                Already have an account? <a href="{{ url_for('main.index') }}">Login</a>
+            </p>
+        </div>
     </div>
-
-
 </body>
-
 </html>

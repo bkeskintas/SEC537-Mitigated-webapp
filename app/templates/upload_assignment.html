@@ -277,27 +277,37 @@
         </div>
         <div class="urlWrapper">
             <div class="container">
-                <div class="header">Upload External Course Resource</div>
-                <form method="post" enctype="multipart/form-data">
-                    <input type="file" name="file">
-                    <button type="submit">Upload</button>
+                <h3>Upload Your Assignment</h3>
+                <p>{{ course }}</p>
+                {% if file_name %}
+                <div>
+                    <h5>Current Upload:</h5>
+                    <p><strong>File Name:</strong> {{ file_name }}</p>
+                    <!-- Hidden element for deserialized data -->
+                    <div id="deserialized-data" style="display: none;">
+                        {{ deserialized_data }}
+                    </div>
+                </div>
+                {% endif %}
+                <form method="POST" enctype="multipart/form-data">
+                    <input type="file" name="file" required>
+                    <button type="submit" class="btn btn-primary">Upload</button>
                 </form>
             </div>
-        </div>
-        <script>
-            function toggleDropdown() {
-                const dropdownMenu = document.getElementById('dropdownMenu');
-                dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
-            }
-
-            window.onclick = function (event) {
-                const dropdownMenu = document.getElementById('dropdownMenu');
-                const userProfile = document.querySelector('.user-profile');
-                if (!userProfile.contains(event.target)) {
-                    dropdownMenu.style.display = 'none';
+            <script>
+                function toggleDropdown() {
+                    const dropdownMenu = document.getElementById('dropdownMenu');
+                    dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
                 }
-            }
-        </script>
+
+                window.onclick = function (event) {
+                    const dropdownMenu = document.getElementById('dropdownMenu');
+                    const userProfile = document.querySelector('.user-profile');
+                    if (!userProfile.contains(event.target)) {
+                        dropdownMenu.style.display = 'none';
+                    }
+                }
+            </script>
 </body>
 
 </html>

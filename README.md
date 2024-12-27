@@ -16,3 +16,8 @@ To run the Docker:
 To run in that env:
 python -m venv venv 
 .\venv\Scripts\Activate 
+
+#register -> "123" passw
+#captcha
+#rate limiting (register) + application genel(nginx) + login 
+#upload_assignment -> file size 
