@@ -35,11 +35,12 @@ def init_db():
 
     #check if users table is empty,  if not it won't do this
     c.execute('SELECT COUNT(*) FROM users')
+    encrypt_method = 'pbkdf2:sha256'
     if c.fetchone()[0] == 0:  #only insert if the table is empty
         users = [
-            ('admin', generate_password_hash('Az09.IamAmin', method='pbkdf2:sha256'), 'admin'),
-            ('duygu', generate_password_hash('Az09.IamDuygu', method='pbkdf2:sha256'), 'student'),
-            ('burak', generate_password_hash('Az09.IamBurak', method='pbkdf2:sha256'), 'student')
+            ('admin', generate_password_hash('Az09.IamAmin', method=encrypt_method), 'admin'),
+            ('duygu', generate_password_hash('Az09.IamDuygu', method=encrypt_method), 'student'),
+            ('burak', generate_password_hash('Az09.IamBurak', method=encrypt_method), 'student')
         ]
         for user in users:
             c.execute('INSERT INTO users (username, password, role) VALUES (?, ?, ?)', user)

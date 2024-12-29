@@ -19,8 +19,8 @@ logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s 
 # Allowed file types for uploads
 ALLOWED_EXTENSIONS = {'pdf', 'docx', 'png'}
 MAX_FILE_SIZE = 10 * 1024 * 1024  # 10 MB
-
-
+DATABASE = 'normal.db'
+REGISTER_HTML = 'register.html'
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -53,6 +53,21 @@ def is_current_user(f):
         return f(*args, **kwargs)
     return decorated_function
 
+def is_bot(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if request.method == 'POST':
+            response_verify=request.form["g-recaptcha-response"]
+            secretkey= current_app.config['RECAPTCHA_SECRET_KEY']
+            verifyurl = current_app.config['VERIFY_URL']
+            verify = requests.post(url=f'{verifyurl}?secret={secretkey}&response={response_verify}').json()
+            #curl -X POST -F "username=testuser" -F "password=testpass" -F "g-recaptcha-response=simulate_bot" http://localhost:5000/login
+            if not verify.get('success'):
+                logging.error(f"Captcha verification failed from ip address: {get_remote_address}")
+                abort(403, "Captcha verification failed!!")
+        return f(*args, **kwargs)
+    return decorated_function
+
 def allowed_file(filename):
     """Check if a file is allowed based on its extension."""
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -62,22 +77,14 @@ def allowed_file(filename):
 def index():
     return render_template('login.html', captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
 
-
 @main.route('/login', methods=['POST'])
 @limiter.limit("10 per hour", key_func=get_remote_address)
+@is_bot
 def login():
-    response_verify=request.form["g-recaptcha-response"]
-    secretKey= current_app.config['RECAPTCHA_SECRET_KEY']
-    verifyUrl = current_app.config['VERIFY_URL']
-    verify = requests.post(url=f'{verifyUrl}?secret={secretKey}&response={response_verify}').json()
-    
-    if not verify.get('success'):
-       abort(403, "Captcha verification failed!!")
- 
     username = request.form['username']
     password = request.form['password']
     
-    conn = sqlite3.connect('normal.db')
+    conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
     query = "SELECT * FROM users WHERE username=?"
     c.execute(query, (username,))
@@ -101,47 +108,39 @@ def login():
 #For Identificaiton and Authentication Failures -> users can set passw like '123'
 @main.route('/register', methods=['GET', 'POST'])
 @limiter.limit("10 per hour", key_func=get_remote_address)
+@is_bot
 def register():
     if request.method == 'POST':
-        response_verify=request.form["g-recaptcha-response"]
-        secretKey= current_app.config['RECAPTCHA_SECRET_KEY']
-        verifyUrl = current_app.config['VERIFY_URL']
-        verify = requests.post(url=f'{verifyUrl}?secret={secretKey}&response={response_verify}').json()
-    
-        if verify.get('success'):
-            abort(403, "Captcha verification failed!!")
-        #curl -X POST -F "username=testuser" -F "password=testpass" -F "g-recaptcha-response=simulate_bot" http://localhost:5000/login
-
         username = request.form['username']
         password = request.form['password']
         confirm_password = request.form['confirm_password']
         
         if password != confirm_password:
-            flash("Passwords or Username wrong", "danger")
-            return render_template('register.html', captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
+            flash("Passwords do not match", "danger")
+            return render_template(REGISTER_HTML, captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
         
         try:
-            with sqlite3.connect('normal.db') as conn:
+            with sqlite3.connect(DATABASE) as conn:
                 c = conn.cursor()
                 c.execute("INSERT INTO users (username, password, role) VALUES (?, ?, ?)", (username, password, 'student'))
                 conn.commit()
             flash("Registration successful! You can now log in.", "success")
             return redirect(url_for('main.index'))
         except sqlite3.IntegrityError:
-            flash("Passwords or Username wrong", "danger")
-            return render_template('register.html', captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
+            flash("Username already exists. Please choose another one.", "danger")
+            return render_template(REGISTER_HTML, captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
         except sqlite3.OperationalError:
-            flash("Database is currently locked. Please try again later.", "danger")
-            return render_template('register.html', captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
+            flash("There was an unexpected Error. Please try again later.", "danger")
+            return render_template(REGISTER_HTML, captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
 
-    return render_template('register.html', captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
+    return render_template(REGISTER_HTML, captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
 
 @main.route('/student/<student_id>')
 @login_required
 @is_user
 @is_current_user
 def student_dashboard(student_id):
-    conn = sqlite3.connect('normal.db')
+    conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
     role = session['role']
     # Parameterized query to fetch grades for the logged-in student
@@ -156,7 +155,7 @@ def student_dashboard(student_id):
 @is_user
 @is_current_user
 def grades(student_id):
-    conn = sqlite3.connect('normal.db')
+    conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
     c.execute("SELECT course, grade, comments FROM grades WHERE student_id=?", (student_id,))
     courses = c.fetchall()
@@ -169,7 +168,7 @@ def grades(student_id):
 @login_required
 @is_admin
 def admin_dashboard():
-    conn = sqlite3.connect('normal.db')
+    conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
     c.execute('''SELECT u.username, g.course, g.grade, g.comments, g.id 
                  FROM grades g JOIN users u ON g.student_id = u.id''')
@@ -183,7 +182,7 @@ def admin_dashboard():
 @login_required
 @is_admin
 def edit_grade(grade_id):
-    conn = sqlite3.connect('normal.db')
+    conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
 
     if request.method == 'POST':
@@ -235,7 +234,7 @@ def upload_resource(student_id):
 @main.route('/logout')
 def logout():
     session.clear()
-    logging.info(f"User logged out.")
+    logging.info("User logged out.")
     return redirect("/")
 
 #FILE SIZE MUST BE ADDED HEREEEE
@@ -249,7 +248,7 @@ def upload_assignment(student_id, course):
     username = session.get('username')
     role = session.get('role')
 
-    conn = sqlite3.connect('normal.db')
+    conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
 
     # Check if an assignment already exists for this student and course
