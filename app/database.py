@@ -39,7 +39,6 @@ def init_db():
     if c.fetchone()[0] == 0:  #only insert if the table is empty
         users = [
             ('admin', generate_password_hash('Az09.IamAmin', method=encrypt_method), 'admin'),
-            ('duygu', generate_password_hash('Az09.IamDuygu', method=encrypt_method), 'student'),
             ('burak', generate_password_hash('Az09.IamBurak', method=encrypt_method), 'student')
         ]
         for user in users:
