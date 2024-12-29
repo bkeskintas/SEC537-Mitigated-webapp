@@ -2,6 +2,14 @@ import os
 from flask import Flask, render_template_string, request
 from datetime import timedelta
 import logging
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+from flask_limiter.errors import RateLimitExceeded
+
+limiter = Limiter(
+    key_func=get_remote_address,  # IP adresine göre sınırlandırma
+    default_limits=["100 per hour"]  # Varsayılan limit
+)
 
 def create_app():
     app = Flask(__name__)
@@ -17,6 +25,8 @@ def create_app():
     app.config['RECAPTCHA_SITE_KEY'] = "6Lc0fKgqAAAAAHTuXoEj4kOO-4RObKWZyIiTRa8O" 
     app.config['RECAPTCHA_SECRET_KEY'] = "6Lc0fKgqAAAAADF9HW-lU0Vi8JBhF4jL_3693v_n"
     app.config['VERIFY_URL'] = "https://www.google.com/recaptcha/api/siteverify"
+
+    limiter.init_app(app)  # Limiter ile Flask uygulamasını bağla
 
     # Create upload folder if it doesn't exist
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
@@ -43,10 +53,17 @@ def create_app():
     def global_internal_server_error(e):
         logging.error(f"Internal server error: {str(e)}")  # Log 500 errors for auditing
         return "An unexpected error occurred. Please try again later.", 500
+    
+    @app.errorhandler(RateLimitExceeded)
+    def rate_limit_exceeded(e):
+        logging.error(f"Too many attemps: {str(e)} {get_remote_address}")  
+        # Log 500 errors for auditing
+        return render_template_string("Siteye aşırı seviyede istekte bulundunuz. Sonra tekrar deneyiniz."), 429
 
     # Default route for testing
     @app.route('/health', methods=['GET'])
     def health_check():
         return "Application is running securely!"
-
+    
+  
     return app

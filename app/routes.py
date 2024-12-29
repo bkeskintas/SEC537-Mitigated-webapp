@@ -8,6 +8,8 @@ import logging
 import requests
 from werkzeug.security import check_password_hash
 from functools import wraps
+from . import limiter 
+from . import get_remote_address
 
 main = Blueprint('main', __name__)
 
@@ -56,11 +58,13 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @main.route('/')
+@limiter.limit("10 per hour", key_func=get_remote_address)
 def index():
     return render_template('login.html', captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
 
 
 @main.route('/login', methods=['POST'])
+@limiter.limit("10 per hour", key_func=get_remote_address)
 def login():
     response_verify=request.form["g-recaptcha-response"]
     secretKey= current_app.config['RECAPTCHA_SECRET_KEY']
@@ -96,6 +100,7 @@ def login():
 
 #For Identificaiton and Authentication Failures -> users can set passw like '123'
 @main.route('/register', methods=['GET', 'POST'])
+@limiter.limit("10 per hour", key_func=get_remote_address)
 def register():
     if request.method == 'POST':
         response_verify=request.form["g-recaptcha-response"]
