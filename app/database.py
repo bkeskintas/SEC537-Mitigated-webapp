@@ -12,7 +12,8 @@ def init_db():
         id INTEGER PRIMARY KEY,
         username TEXT UNIQUE,
         password TEXT NOT NULL,
-        role TEXT NOT NULL CHECK(role IN ('admin', 'student'))
+        role TEXT NOT NULL CHECK(role IN ('admin', 'student')),
+        profile_photo BLOB
     )''')
 
     c.execute('''CREATE TABLE IF NOT EXISTS grades (
@@ -38,12 +39,12 @@ def init_db():
     encrypt_method = 'pbkdf2:sha256'
     if c.fetchone()[0] == 0:  #only insert if the table is empty
         users = [
-            ('admin', generate_password_hash('Az09.IamAmin', method=encrypt_method), 'admin'),
-            ('duygu', generate_password_hash('Az09.IamDuygu', method=encrypt_method), 'student'),
-            ('burak', generate_password_hash('Az09.IamBurak', method=encrypt_method), 'student')
+            ('admin', generate_password_hash('Az09.IamAmin', method=encrypt_method), 'admin', None),
+            ('duygu', generate_password_hash('Az09.IamDuygu', method=encrypt_method), 'student', None),
+            ('burak', generate_password_hash('Az09.IamBurak', method=encrypt_method), 'student', None)
         ]
         for user in users:
-            c.execute('INSERT INTO users (username, password, role) VALUES (?, ?, ?)', user)
+            c.execute('INSERT INTO users (username, password, role, profile_photo) VALUES (?, ?, ?, ?)', user)
             logging.info(f"Inserted user: {user[0]}")
 
     #check if grades table is empty, if not it won't do this

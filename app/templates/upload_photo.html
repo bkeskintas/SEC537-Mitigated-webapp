@@ -68,6 +68,28 @@
             text-align: center;
         }
 
+        table {
+            margin: 0 auto;
+            width: 50%;
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 1em;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
         .initialBox {
             margin-top: 1.5rem;
             margin-left: 4rem;
@@ -84,6 +106,41 @@
 
         }
 
+        .cardBg {
+            background-color: #eeeef0;
+            border: none;
+            border-radius: 0rem;
+        }
+
+        .formInp {
+            padding-bottom: 2.5rem;
+        }
+
+        .inputPd {
+            padding-bottom: 1rem;
+        }
+
+        .inputStyl {
+            border: none;
+            border-radius: 0rem;
+            height: 2.6rem;
+        }
+
+        .lostPssw {
+            font-size: 14px;
+        }
+
+
+
+        /* User Profile Container */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            /* Adds space between elements */
+        }
+
+        /* Notification Badge */
         .notification {
             position: relative;
         }
@@ -100,37 +157,55 @@
             padding: 3px 6px;
         }
 
+        /* User Name Styling */
         .user-name {
             font-size: 16px;
             color: #2c577b;
             font-weight: bold;
         }
 
-        /* Profile Image Styling */
-        .profile-img {
-            height: 40px;
-            width: 60px;
-            border-radius: 50%;
-            /* Makes the image circular */
-            border: 2px solid #afbaf0;
-
-        }
-
+    
         .icn {
             color: #758e9f;
         }
 
-        .grades-container {
-
+        .container {
+            max-width: 800px;
+            background-color: #f3f2f6;
             padding: 20px;
-            background-color: #fff;
+            justify-content: space-evenly;
+            margin-top: 2rem;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
+            height: 18rem;
+            display: flex;
+            flex-direction: column;
 
         }
 
         h2 {
             margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th,
+        table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+        }
+
+        .course {
+            color: white;
+            text-align: center;
+            margin-left: 10px;
         }
 
         .dropdown-menu {
@@ -171,69 +246,34 @@
             cursor: pointer;
         }
 
-        .container {
-            max-width: 800px;
-            background-color: #f3f2f6;
-            padding: 20px;
-
-            margin-top: 2rem;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-
+        .grades {
+            font-size: 20px;
+            color: #707072;
+            font-weight: 700;
         }
 
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #0073C1;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #005A9E;
-        }
-
-        pre {
-            background-color: #f4f4f4;
-            padding: 10px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-
-        .course {
-            color: white;
-            text-align: center;
-            margin-left: 10px;
-        }
-
-        .urlWrapper {
+        .profWrapper {
+            height: 8rem;
             display: flex;
-            align-items: start;
-            justify-content: flex-start;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .profPic {
+            height: 100px;
+            width: 70px;
+            border-radius: 50%;
+            /* Makes the image circular */
+            border: 2px solid #afbaf0;
+            margin-right: 1rem;
+            margin-left: 1rem;
 
         }
 
-        .header {
-            color: #6e6f6f;
-            padding-bottom: 2rem;
+        .name {
+            color: #565555;
             font-size: 28px;
-            font-weight: 600;
-        }
-
-        .btn {
-            margin-top: 2rem;
-            margin-right: -10px;
-            margin-bottom: 2rem;
-
+            font-weight: 700;
         }
     </style>
 </head>
@@ -257,13 +297,18 @@
                 </div>
                 <div class="user-profile" onclick="toggleDropdown()">
                     <span class="user-name">{{ username }} <strong> ({{role}})</strong></span>
-                    <img src="{{ url_for('static', filename='user.png') }}" alt="Profile" class="profile-img">
+                    {% if profile_photo %}
+                    <img src="{{ url_for('main.get_profile_photo', student_id=student_id) }}" alt="Profile"
+                        class="profPic">
+                    {% else %}
+                    <img src="{{ url_for('static', filename='user.png') }}" alt="Profile" class="profPic">
+                    {% endif %}
                     <div class="dropdown-menu" id="dropdownMenu">
                         <a href="#">Profile</a>
                         <a href="{{ url_for('main.grades', student_id=student_id) }}">Grades</a>
                         <a href="#">Calendar</a>
                         <a href="#">Private files</a>
-                        <a href="#">Preferences</a>
+                        <a href="{{ url_for('main.upload_photo', student_id=student_id) }}">Update Profile Photo</a>
                         <hr>
                         <a href="/logout"><i class="fas fa-sign-out-alt"></i> Log out</a>
                     </div>
@@ -275,28 +320,37 @@
             <a class="course" href="{{ url_for('main.student_dashboard', student_id=student_id) }}">My Courses</a>
 
         </div>
-        <div class="urlWrapper">
-            <div class="container">
-                <div class="header">Upload External Course Resource</div>
-                <form method="POST" action="{{url_for('main.upload_resource', student_id = student_id)}}">
-                    <label for="url">Resource URL:</label>
 
-                    <input type="text" id="url" name="url" placeholder="URL" required>
-                    <div class="btn"><button type="submit">Preview</button></div>
-                </form>
+        <div class="container">
 
-                {% if url and content %}
-                <h2>Preview of: {{ url }}</h2>
-                <pre>{{ content }}</pre>
+            <h1>Upload Profile Photo</h1>
+            <div class="profWrapper">
+                {% if profile_photo %}
+                <img src="{{ url_for('main.get_profile_photo', student_id=student_id) }}" alt="Profile" class="profPic">
+                {% else %}
+                <img src="{{ url_for('static', filename='user.png') }}" alt="Profile" class="profPic">
                 {% endif %}
+                <span class="name">{{ username }} <strong> ({{role}})</strong></span>
             </div>
+            <form method="POST" action="{{ url_for('main.upload_photo', student_id=student_id) }}"
+                enctype="multipart/form-data">
+                <label for="photo_url">Enter the URL of your profile photo:</label>
+                <input type="text" name="photo_url" id="photo_url" required>
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+
         </div>
+
+
+
+        <!-- JavaScript to Toggle the Dropdown -->
         <script>
             function toggleDropdown() {
                 const dropdownMenu = document.getElementById('dropdownMenu');
                 dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
             }
 
+            // Close the dropdown if clicked outside
             window.onclick = function (event) {
                 const dropdownMenu = document.getElementById('dropdownMenu');
                 const userProfile = document.querySelector('.user-profile');

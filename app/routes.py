@@ -1,7 +1,7 @@
 import os
 import pickle
 import sqlite3
-from flask import Blueprint, current_app, render_template, request, redirect, url_for, session, abort, flash
+from flask import Blueprint, Response, current_app, render_template, request, redirect, url_for, session, abort, flash
 from werkzeug.utils import secure_filename
 from datetime import datetime
 import logging
@@ -122,7 +122,7 @@ def register():
         try:
             with sqlite3.connect(DATABASE) as conn:
                 c = conn.cursor()
-                c.execute("INSERT INTO users (username, password, role) VALUES (?, ?, ?)", (username, password, 'student'))
+                c.execute("INSERT INTO users (username, password, role, profile_photo) VALUES (?, ?, ?)", (username, password, 'student', None))
                 conn.commit()
             flash("Registration successful! You can now log in.", "success")
             return redirect(url_for('main.index'))
@@ -140,28 +140,44 @@ def register():
 @is_user
 @is_current_user
 def student_dashboard(student_id):
+    username=session['username'] 
+    role=  session['role'] 
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
     role = session['role']
     # Parameterized query to fetch grades for the logged-in student
     c.execute("SELECT course, grade, comments FROM grades WHERE student_id=?", (student_id,))
     courses = c.fetchall()
+    c = conn.cursor()
+    c.execute('SELECT profile_photo FROM users WHERE id = ?', (student_id,))
+
+    result = c.fetchone()
+    if result:
+        profile_photo = result[0]
     conn.close()
 
-    return render_template('student_dashboard.html', courses=courses, username=session['username'], student_id=student_id, role=role)
+    return render_template('student_dashboard.html', courses=courses, username=username, student_id=student_id, role=role, profile_photo=profile_photo)
 
 @main.route('/student/<student_id>/grades')
 @login_required
 @is_user
 @is_current_user
 def grades(student_id):
+    username = session.get('username')
+    role = session.get('role')
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
     c.execute("SELECT course, grade, comments FROM grades WHERE student_id=?", (student_id,))
     courses = c.fetchall()
+    c = conn.cursor()
+    c.execute('SELECT profile_photo FROM users WHERE id = ?', (student_id,))
+
+    result = c.fetchone()
+    if result:
+        profile_photo = result[0]
     conn.close()
 
-    return render_template('grades.html', courses=courses, username=session['username'], student_id=student_id)
+    return render_template('grades.html', courses=courses, username=username, student_id=student_id, profile_photo=profile_photo, role=role)
 
 
 @main.route('/admin')
@@ -200,37 +216,6 @@ def edit_grade(grade_id):
     conn.close()
     return render_template('edit_grade.html', grade_data=grade_data)
 
-
-@main.route('/student/<student_id>/upload_resource', methods=['GET', 'POST'])
-@login_required
-@is_user
-@is_current_user
-def upload_resource(student_id):
-    if request.method == 'POST':
-        url = request.form.get('url')
-
-        try:
-            parsed_url = requests.utils.urlparse(url)
-            if parsed_url.netloc not in ['trusted-resource.com']:
-                raise ValueError("Untrusted domain")
-
-            response = requests.get(url, timeout=5)
-            content_type = response.headers.get('Content-Type', '')
-
-            if 'text/html' in content_type:
-                content = response.text
-            else:
-                content = "Unsupported file type."
-
-        except Exception as e:
-            logging.error(f"SSRF attempt or error: {str(e)}")
-            content = f"Error fetching resource: {str(e)}"
-
-        return render_template('upload_resource.html', url=url, content=content, student_id=student_id)
-
-    return render_template('upload_resource.html', student_id=student_id)
-
-
 @main.route('/logout')
 def logout():
     session.clear()
@@ -247,8 +232,16 @@ def logout():
 def upload_assignment(student_id, course):
     username = session.get('username')
     role = session.get('role')
+   
 
     conn = sqlite3.connect(DATABASE)
+    c = conn.cursor()
+    c.execute('SELECT profile_photo FROM users WHERE id = ?', (student_id,))
+
+    result = c.fetchone()
+    if result:
+        profile_photo = result[0]
+  
     c = conn.cursor()
 
     # Check if an assignment already exists for this student and course
@@ -287,7 +280,7 @@ def upload_assignment(student_id, course):
                                    course=course, 
                                    student_id=student_id, 
                                    username=username, 
-                                   role=role,)
+                                   role=role, profile_photo=profile_photo)
 
         return "No file uploaded!", 400
 
@@ -298,28 +291,68 @@ def upload_assignment(student_id, course):
                            username=username, 
                            role=role, 
                            file_name=file_name, 
-                           deserialized_data=deserialized_data)
+                           deserialized_data=deserialized_data, profile_photo=profile_photo)
 
-@main.route('/student/<student_id>/upload', methods=['GET', 'POST'])
-@login_required
-@is_user
-@is_current_user
-def upload_file(student_id):
+@main.route('/upload_photo/<student_id>', methods=['GET', 'POST'])
+def upload_photo(student_id):
+    username = session.get('username')
+    role = session.get('role')
+    profile_photo = None
+
+    conn = sqlite3.connect(DATABASE)
+    c = conn.cursor()
+
+    # Fetch the current profile photo
+    c.execute('SELECT profile_photo FROM users WHERE id = ?', (student_id,))
+    result = c.fetchone()
+    if result:
+        profile_photo = result[0]
+    conn.close()
+
     if request.method == 'POST':
-        uploaded_file = request.files.get('file')
+        photo_url = request.form.get('photo_url')
+        print(photo_url)
+        
+        if photo_url:
+            try:
+                # Fetch the image data from the provided URL
+                response = requests.get(photo_url, timeout=5)
+                response.raise_for_status()  # Raise an HTTPError for bad responses
+                file_data = response.content  # Binary content of the image
 
-        if uploaded_file and allowed_file(uploaded_file.filename):
-            filename = secure_filename(uploaded_file.filename)
+                # Store the image in the database
+                conn = sqlite3.connect(DATABASE)
+                c = conn.cursor()
+                c.execute('UPDATE users SET profile_photo = ? WHERE id = ?', (file_data, student_id))
+                conn.commit()
+                conn.close()
 
-            if uploaded_file.content_length > MAX_FILE_SIZE:
-                return "File size exceeds the limit!", 413
+                flash('Profile photo uploaded successfully!')
+                return redirect(url_for('main.upload_photo', student_id=student_id))
 
-            file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
-            uploaded_file.save(file_path)
-            logging.info(f"File uploaded: {filename} by student_id: {student_id}")
-            return f"File uploaded successfully: {filename}"
+            except requests.exceptions.RequestException as e:
+                flash(f'Failed to fetch the photo from the URL: {str(e)}')
+                return redirect(url_for('main.upload_photo', student_id=student_id))
 
-        return "Invalid file type or no file uploaded!", 400
+        flash('No photo URL provided!')
+        return redirect(url_for('main.upload_photo', student_id=student_id))
 
-    return render_template('upload_project.html', student_id=student_id)
+    return render_template('upload_photo.html', username=username, role=role, student_id=student_id, profile_photo=profile_photo)
+
+@main.route('/get_profile_photo/<student_id>')
+def get_profile_photo(student_id):
+    conn = sqlite3.connect(DATABASE)
+    c = conn.cursor()
+
+    # Fetch the profile photo from the database
+    c.execute('SELECT profile_photo FROM users WHERE id = ?', (student_id,))
+    result = c.fetchone()
+    conn.close()
+
+    if result and result[0]:
+        # Return the binary data as an image
+        return Response(result[0], mimetype='image/jpeg')
+    else:
+        # Return a default image if no profile photo is found
+        return redirect(url_for('static', filename='user.png'))
 

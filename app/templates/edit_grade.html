@@ -320,7 +320,7 @@
                         <a href="{{ url_for('main.grades', student_id=student_id) }}">Grades</a>
                         <a href="#">Calendar</a>
                         <a href="#">Private files</a>
-                        <a href="#">Preferences</a>
+                        <a href="{{ url_for('main.upload_photo', student_id=student_id) }}">Update Profile Photo</a>
                         <hr>
                         <a href="/logout"><i class="fas fa-sign-out-alt"></i> Log out</a>
                     </div>
