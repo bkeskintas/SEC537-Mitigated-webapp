@@ -127,6 +127,12 @@
             font-size: 14px;
         }
     </style>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+       function onSubmit(token) {
+         document.getElementById("register").submit();
+       }
+     </script>
 </head>
 
 <body>
@@ -156,7 +162,7 @@
             {% endfor %}
             {% endif %}
             {% endwith %}
-            <form method="POST" action="{{ url_for('main.register') }}">
+            <form id="register" method="POST" action="{{ url_for('main.register') }}">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" name="username" required>
@@ -169,7 +175,7 @@
                     <label for="confirm_password" class="form-label">Confirm Password</label>
                     <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Register</button>
+                <button type="submit" class="g-recaptcha btn btn-primary w-100" data-sitekey="{{captchaKey}}" data-callback='onSubmit' data-action='submit'>Register</button>
             </form>
             <p class="text-center mt-3">
                 Already have an account? <a href="{{ url_for('main.index') }}">Login</a>

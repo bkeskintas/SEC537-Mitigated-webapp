@@ -128,6 +128,12 @@
             font-size: 14px;
         }
     </style>
+     <script src="https://www.google.com/recaptcha/api.js"></script>
+     <script>
+        function onSubmit(token) {
+          document.getElementById("sec537-form").submit();
+        }
+      </script>
 </head>
 
 <body>
@@ -156,7 +162,7 @@
                     <div class="card shadow-sm cardBg cardBdy">
 
                         <div class="card-body ">
-                            <form method="POST" action="/login">
+                            <form id="sec537-form" method="POST" action="/login">
                                 <div class="formInp">
                                     <div class="form-group inputPd">
 
@@ -169,7 +175,7 @@
                                             id="password" name="password" required>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                <button type="submit" class="g-recaptcha btn btn-primary btn-block" data-sitekey="{{captchaKey}}" data-callback='onSubmit' data-action='submit'>Login</button>
                                 <a class="lostPssw" href="{{ url_for('main.register') }}">Register?</a>
                             </form>
                         </div>

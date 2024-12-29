@@ -17,7 +17,16 @@ To run in that env:
 python -m venv venv 
 .\venv\Scripts\Activate 
 
+
+#Başa eklenen yıldız yeni farkedilen olay, sona eklenmesi kritiklik #*a**
+Yapılacaklar:
 #register -> "123" passw
-#captcha
-#rate limiting (register) + application genel(nginx) + login 
-#upload_assignment -> file size 
+#rate limiting (register) + application genel(nginx) + login **
+#upload_assignment -> file size **
+#Vulnerability kalan 2? 8-9? ***
+#*Captcha keyi ve //her runda yeni oluşan keyler. -> doğru şekilde saklanmalı ama nasıl**
+
+Yapılan:
+#@annatotation ile sırayla hatalar konuldu. IDOR engellendi.
+#captcha reCaptcha v3 -> register ve login'e koydum.
+#Registerda hata mesajını değiştirdim -> fazla bilgi veriyordu.

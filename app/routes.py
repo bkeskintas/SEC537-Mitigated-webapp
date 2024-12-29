@@ -55,14 +55,21 @@ def allowed_file(filename):
     """Check if a file is allowed based on its extension."""
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-
 @main.route('/')
 def index():
-    return render_template('login.html')
+    return render_template('login.html', captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
 
 
 @main.route('/login', methods=['POST'])
 def login():
+    response_verify=request.form["g-recaptcha-response"]
+    secretKey= current_app.config['RECAPTCHA_SECRET_KEY']
+    verifyUrl = current_app.config['VERIFY_URL']
+    verify = requests.post(url=f'{verifyUrl}?secret={secretKey}&response={response_verify}').json()
+    
+    if not verify.get('success'):
+       abort(403, "Captcha verification failed!!")
+ 
     username = request.form['username']
     password = request.form['password']
     
@@ -91,13 +98,22 @@ def login():
 @main.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
+        response_verify=request.form["g-recaptcha-response"]
+        secretKey= current_app.config['RECAPTCHA_SECRET_KEY']
+        verifyUrl = current_app.config['VERIFY_URL']
+        verify = requests.post(url=f'{verifyUrl}?secret={secretKey}&response={response_verify}').json()
+    
+        if verify.get('success'):
+            abort(403, "Captcha verification failed!!")
+        #curl -X POST -F "username=testuser" -F "password=testpass" -F "g-recaptcha-response=simulate_bot" http://localhost:5000/login
+
         username = request.form['username']
         password = request.form['password']
         confirm_password = request.form['confirm_password']
         
         if password != confirm_password:
-            flash("Passwords do not match", "danger")
-            return render_template('register.html')
+            flash("Passwords or Username wrong", "danger")
+            return render_template('register.html', captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
         
         try:
             with sqlite3.connect('normal.db') as conn:
@@ -107,13 +123,13 @@ def register():
             flash("Registration successful! You can now log in.", "success")
             return redirect(url_for('main.index'))
         except sqlite3.IntegrityError:
-            flash("Username already exists. Please choose another one.", "danger")
-            return render_template('register.html')
+            flash("Passwords or Username wrong", "danger")
+            return render_template('register.html', captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
         except sqlite3.OperationalError:
             flash("Database is currently locked. Please try again later.", "danger")
-            return render_template('register.html')
+            return render_template('register.html', captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
 
-    return render_template('register.html')
+    return render_template('register.html', captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
 
 @main.route('/student/<student_id>')
 @login_required

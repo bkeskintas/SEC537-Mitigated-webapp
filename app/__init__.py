@@ -14,6 +14,9 @@ def create_app():
     app.config['SESSION_COOKIE_SECURE'] = True  # Send cookies only over HTTPS
     app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)  # Session expires after 30 minutes
     app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024  # Limit file uploads to 10 MB
+    app.config['RECAPTCHA_SITE_KEY'] = "6Lc0fKgqAAAAAHTuXoEj4kOO-4RObKWZyIiTRa8O" 
+    app.config['RECAPTCHA_SECRET_KEY'] = "6Lc0fKgqAAAAADF9HW-lU0Vi8JBhF4jL_3693v_n"
+    app.config['VERIFY_URL'] = "https://www.google.com/recaptcha/api/siteverify"
 
     # Create upload folder if it doesn't exist
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
