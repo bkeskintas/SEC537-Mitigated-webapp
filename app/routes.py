@@ -5,6 +5,7 @@ from flask import Blueprint, Response, current_app, render_template, request, re
 from werkzeug.utils import secure_filename
 from datetime import datetime
 import logging
+import re
 import requests
 from werkzeug.security import check_password_hash
 from functools import wraps
@@ -12,6 +13,7 @@ from . import limiter
 from . import get_remote_address
 from werkzeug.security import generate_password_hash
 from .forms import RegistrationForm
+import socket
 
 main = Blueprint('main', __name__)
 
@@ -303,6 +305,8 @@ def upload_assignment(student_id, course):
                            deserialized_data=deserialized_data, profile_photo=profile_photo)
 
 @main.route('/upload_photo/<student_id>', methods=['GET', 'POST'])
+@login_required
+@is_current_user
 def upload_photo(student_id):
     username = session.get('username')
     role = session.get('role')
@@ -320,14 +324,48 @@ def upload_photo(student_id):
 
     if request.method == 'POST':
         photo_url = request.form.get('photo_url')
-        print(photo_url)
-        
         if photo_url:
+            # Validate the URL before making a request
+            if not photo_url.lower().startswith(('http://', 'https://')):
+                flash('Invalid!')
+                return redirect(url_for('main.upload_photo', student_id=student_id))
+
+            # Basic regex validation for suspicious domains (you can add more checks)
+            url_regex = r'^https?://[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(/.*)?$'
+            if not re.match(url_regex, photo_url):
+                flash('Invalid!')
+                return redirect(url_for('main.upload_photo', student_id=student_id))
+
+            # Perform a DNS resolution check to ensure the domain is legitimate
             try:
-                # Fetch the image data from the provided URL
+                domain = photo_url.split('/')[2]  # Extract domain from URL
+                ip_address = socket.gethostbyname(domain)  # DNS resolution
+
+                # Check for private IP addresses
+                if ip_address.startswith("127.") or ip_address.startswith("192.168.") or ip_address.startswith("10.") or ip_address.startswith("169.254."):
+                    flash('Invalid!')
+                    return redirect(url_for('main.upload_photo', student_id=student_id))
+
+            except socket.gaierror:
+                flash('Failed to resolve the domain. URL might be invalid!')
+                return redirect(url_for('main.upload_photo', student_id=student_id))
+
+            try:
+                # Fetch the image data with a shorter timeout
                 response = requests.get(photo_url, timeout=5)
                 response.raise_for_status()  # Raise an HTTPError for bad responses
+
+                # Check if the response is an image and validate its type using magic bytes
+                if 'image' not in response.headers.get('Content-Type', ''):
+                    flash('The URL does not point to an image!')
+                    return redirect(url_for('main.upload_photo', student_id=student_id))
+
                 file_data = response.content  # Binary content of the image
+
+                # Validate image type using magic bytes
+                if not (file_data.startswith(b'\xff\xd8') or file_data.startswith(b'\x89PNG\r\n\x1a\n')):
+                    flash('The URL does not point to a valid JPEG or PNG image!')
+                    return redirect(url_for('main.upload_photo', student_id=student_id))
 
                 # Store the image in the database
                 conn = sqlite3.connect(DATABASE)
@@ -337,6 +375,10 @@ def upload_photo(student_id):
                 conn.close()
 
                 flash('Profile photo uploaded successfully!')
+                return redirect(url_for('main.upload_photo', student_id=student_id))
+
+            except requests.exceptions.Timeout:
+                flash('The request timed out. Please provide a faster URL.')
                 return redirect(url_for('main.upload_photo', student_id=student_id))
 
             except requests.exceptions.RequestException as e:
@@ -349,6 +391,8 @@ def upload_photo(student_id):
     return render_template('upload_photo.html', username=username, role=role, student_id=student_id, profile_photo=profile_photo)
 
 @main.route('/get_profile_photo/<student_id>')
+@login_required
+@is_current_user
 def get_profile_photo(student_id):
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()

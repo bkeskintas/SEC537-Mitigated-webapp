@@ -324,6 +324,15 @@
         <div class="container">
 
             <h1>Upload Profile Photo</h1>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
             <div class="profWrapper">
                 {% if profile_photo %}
                 <img src="{{ url_for('main.get_profile_photo', student_id=student_id) }}" alt="Profile" class="profPic">
@@ -334,7 +343,7 @@
             </div>
             <form method="POST" action="{{ url_for('main.upload_photo', student_id=student_id) }}"
                 enctype="multipart/form-data">
-                <label for="photo_url">Enter the URL of your profile photo:</label>
+                <label for="photo_url">Enter the valid jpeg or png URL of your profile photo:</label>
                 <input type="text" name="photo_url" id="photo_url" required>
                 <button type="submit" class="btn btn-primary">Upload</button>
             </form>
