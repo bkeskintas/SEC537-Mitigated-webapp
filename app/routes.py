@@ -1,5 +1,5 @@
 import os
-import pickle
+import json
 import sqlite3
 from flask import Blueprint, Response, current_app, render_template, request, redirect, url_for, session, abort, flash
 from werkzeug.utils import secure_filename
@@ -243,7 +243,6 @@ def upload_assignment(student_id, course):
     username = session.get('username')
     role = session.get('role')
    
-
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
     c.execute('SELECT profile_photo FROM users WHERE id = ?', (student_id,))
@@ -263,8 +262,8 @@ def upload_assignment(student_id, course):
     if existing_assignment:
         file_name = existing_assignment[0]  # Existing file name
         try:
-            # Insecure Deserialization
-            deserialized_data = pickle.loads(existing_assignment[1])
+            # Secure Deserialization
+            deserialized_data = json.loads(existing_assignment[1])
         except Exception as e:
             deserialized_data = f"Error deserializing data: {str(e)}"
 
@@ -273,8 +272,8 @@ def upload_assignment(student_id, course):
 
         # Vulnerable: No size or type validation (SSRF)
         if uploaded_file:
-            # Serialize file data and store it in the database (Insecure Serialization)
-            serialized_data = pickle.dumps(uploaded_file.read())
+            # Serialize file data and store it in the database (Secure Serialization)
+            serialized_data = json.dumps(uploaded_file.read().decode('latin1'))
             file_name = uploaded_file.filename
             if existing_assignment:
                 # Update existing assignment
