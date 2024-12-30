@@ -132,6 +132,54 @@
        function onSubmit(token) {
          document.getElementById("register").submit();
        }
+
+   document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('password').addEventListener('input', function() {
+            var password = this.value;
+            var strengthText = getPasswordStrength(password);
+            var strengthDiv = document.getElementById('password-strength');
+            strengthDiv.textContent = strengthText;
+            strengthDiv.className = getStrengthClass(strengthText);
+        });
+
+        function getPasswordStrength(password) {
+            var strength = 0;
+            if (password.length >= 8) strength++;
+            if (password.match(/[a-z]/)) strength++;
+            if (password.match(/[A-Z]/)) strength++;
+            if (password.match(/\d/)) strength++;
+            if (password.match(/[@$!%*?&]/)) strength++;
+            
+            switch (strength) {
+                case 0:
+                case 1:
+                    return 'Very Weak';
+                case 2:
+                    return 'Weak';
+                case 3:
+                    return 'Moderate';
+                case 4:
+                    return 'Almost Strong';
+                case 5:
+                    return 'Acceptable Strength';
+            }
+        }
+        
+        function getStrengthClass(strengthText) {
+            switch (strengthText) {
+                case 'Very Weak':
+                    return 'text-danger';
+                case 'Weak':
+                    return 'text-warning';
+                case 'Moderate':
+                    return 'text-info';
+                case 'Almost Strong':
+                    return 'text-primary';
+                case 'Acceptable Strength':
+                    return 'text-success';
+            }
+        }
+    });
      </script>
 </head>
 
@@ -163,17 +211,20 @@
             {% endif %}
             {% endwith %}
             <form id="register" method="POST" action="{{ url_for('main.register') }}">
+                {{ form.hidden_tag() }}
+
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
+                    {{ form.username(class="form-control") }}
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
+                    {{ form.password(class="form-control") }}
+                    <div id="password-strength" class="mt-2"></div>
                 </div>
                 <div class="mb-3">
                     <label for="confirm_password" class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                    {{ form.confirm_password(class="form-control") }}
                 </div>
                 <button type="submit" class="g-recaptcha btn btn-primary w-100" data-sitekey="{{captchaKey}}" data-callback='onSubmit' data-action='submit'>Register</button>
             </form>

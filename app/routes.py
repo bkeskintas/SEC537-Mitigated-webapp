@@ -11,6 +11,7 @@ from functools import wraps
 from . import limiter 
 from . import get_remote_address
 from werkzeug.security import generate_password_hash
+from .forms import RegistrationForm
 
 main = Blueprint('main', __name__)
 
@@ -111,15 +112,17 @@ def login():
 @limiter.limit("10 per hour", key_func=get_remote_address)
 @is_bot
 def register():
-    if request.method == 'POST':
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        print("Form validated: ", form.validate_on_submit())
         username = request.form['username']
         password = request.form['password']
         confirm_password = request.form['confirm_password']
-        
+
         if password != confirm_password:
             flash("Passwords do not match", "danger")
             return render_template(REGISTER_HTML, captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
-        
+
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
         try:
             with sqlite3.connect(DATABASE) as conn:
@@ -130,12 +133,17 @@ def register():
             return redirect(url_for('main.index'))
         except sqlite3.IntegrityError:
             flash("Username already exists. Please choose another one.", "danger")
-            return render_template(REGISTER_HTML, captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
+            return render_template(REGISTER_HTML, form=form, captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
         except sqlite3.OperationalError:
             flash("There was an unexpected Error. Please try again later.", "danger")
-            return render_template(REGISTER_HTML, captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
+            return render_template(REGISTER_HTML, form=form, captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
+    else:
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(f"Error in {getattr(form, field).label.text}: {error}", "danger")
+        print("Form errors: ", form.errors)
+    return render_template(REGISTER_HTML, form=form, captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
 
-    return render_template(REGISTER_HTML, captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
 
 @main.route('/student/<student_id>')
 @login_required
