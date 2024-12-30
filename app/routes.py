@@ -10,6 +10,7 @@ from werkzeug.security import check_password_hash
 from functools import wraps
 from . import limiter 
 from . import get_remote_address
+from werkzeug.security import generate_password_hash
 
 main = Blueprint('main', __name__)
 
@@ -119,10 +120,11 @@ def register():
             flash("Passwords do not match", "danger")
             return render_template(REGISTER_HTML, captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
         
+        hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
         try:
             with sqlite3.connect(DATABASE) as conn:
                 c = conn.cursor()
-                c.execute("INSERT INTO users (username, password, role, profile_photo) VALUES (?, ?, ?)", (username, password, 'student', None))
+                c.execute("INSERT INTO users (username, password, role, profile_photo) VALUES (?, ?, ?, ?)", (username, hashed_password, 'student', None))
                 conn.commit()
             flash("Registration successful! You can now log in.", "success")
             return redirect(url_for('main.index'))
