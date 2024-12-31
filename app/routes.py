@@ -1,4 +1,5 @@
 import json
+import os
 import sqlite3
 from flask import Blueprint, Response, current_app, render_template, request, redirect, url_for, session, abort, flash
 import logging
@@ -12,6 +13,8 @@ from werkzeug.security import generate_password_hash
 from .forms import RegistrationForm
 import socket
 import magic
+from werkzeug.utils import secure_filename
+
 
 main = Blueprint('main', __name__)
 
@@ -232,26 +235,24 @@ def logout():
     logging.info("User logged out.")
     return redirect("/")
 
-#FILE SIZE MUST BE ADDED HEREEEE
-#VULNERABLE LIKE THIS
-#For SSRF -> DOS Example && Software and Data Integrity Failures -> Insecure Deserialization
 @main.route('/student/<student_id>/upload_assignment/<course>', methods=['GET', 'POST'])
 @login_required
 @is_user
 @is_current_user
+@limiter.limit("5 per minute", key_func=get_remote_address)  # Rate limiting
 def upload_assignment(student_id, course):
     username = session.get('username')
     role = session.get('role')
-   
+    profile_photo = None
+
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
-    c.execute('SELECT profile_photo FROM users WHERE id = ?', (student_id,))
 
+    # Fetch the current profile photo
+    c.execute('SELECT profile_photo FROM users WHERE id = ?', (student_id,))
     result = c.fetchone()
     if result:
         profile_photo = result[0]
-  
-    c = conn.cursor()
 
     # Check if an assignment already exists for this student and course
     c.execute("SELECT file_name, file_data FROM assignments WHERE student_id=? AND course=?", (student_id, course))
@@ -264,34 +265,65 @@ def upload_assignment(student_id, course):
         try:
             # Secure Deserialization
             deserialized_data = json.loads(existing_assignment[1])
-        except Exception as e:
-            deserialized_data = f"Error deserializing data: {str(e)}"
+        except json.JSONDecodeError:
+            logging.error("Deserialization failed for student_id: %s, course: %s", student_id, course)
+            deserialized_data = None  # Handle securely without exposing errors
 
     if request.method == 'POST':
         uploaded_file = request.files.get('file')
 
-        # Vulnerable: No size or type validation (SSRF)
         if uploaded_file:
-            # Serialize file data and store it in the database (Secure Serialization)
-            serialized_data = json.dumps(uploaded_file.read().decode('latin1'))
-            file_name = uploaded_file.filename
-            if existing_assignment:
-                # Update existing assignment
-                c.execute("UPDATE assignments SET file_data=?, file_name=? WHERE student_id=? AND course=?", 
-                          (serialized_data, file_name, student_id, course))
-            else:
-                # New assignment
-                c.execute("INSERT INTO assignments (student_id, course, file_data, file_name) VALUES (?, ?, ?, ?)", 
-                          (student_id, course, serialized_data, file_name))
-            conn.commit()
-            conn.close()
-            return render_template('successfully_upload.html', 
+            # Ensure the file has an allowed extension
+            file_extension = uploaded_file.filename.rsplit('.', 1)[1].lower() if '.' in uploaded_file.filename else ''
+            if file_extension not in ALLOWED_EXTENSIONS:
+                flash('Invalid file type. Only PDF, DOCX and PNG are allowed!', 'warning')
+                return redirect(url_for('main.upload_assignment', student_id=student_id, course=course))
+
+            # Validate file size
+            uploaded_file.seek(0, os.SEEK_END)  # Move to end of file
+            file_size = uploaded_file.tell()  # Get file size
+            uploaded_file.seek(0)  # Reset file pointer to the beginning
+            if file_size > MAX_FILE_SIZE:
+                flash('File size exceeds the 10 MB limit!', 'warning')
+                return redirect(url_for('main.upload_assignment', student_id=student_id, course=course))
+
+            # Validate MIME type using python-magic
+            mime = magic.Magic(mime=True)
+            mime_type = mime.from_buffer(uploaded_file.read(2048))  # Read the first 2 KB for MIME validation
+            uploaded_file.seek(0)  # Reset file pointer
+            if mime_type not in {'application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'}:
+                flash('Invalid file type. Only PDF and DOCX are allowed!', 'warning')
+                return redirect(url_for('main.upload_assignment', student_id=student_id, course=course))
+
+            # Serialize file data securely
+            serialized_data = json.dumps(uploaded_file.read().decode('latin1'))  # Using safe serialization
+            file_name = secure_filename(uploaded_file.filename)  # Prevent directory traversal attacks
+
+            # Insert or update assignment
+            try:
+                if existing_assignment:
+                    c.execute("UPDATE assignments SET file_data=?, file_name=? WHERE student_id=? AND course=?", 
+                              (serialized_data, file_name, student_id, course))
+                else:
+                    c.execute("INSERT INTO assignments (student_id, course, file_data, file_name) VALUES (?, ?, ?, ?)", 
+                              (student_id, course, serialized_data, file_name))
+                conn.commit()
+                flash('Assignment uploaded successfully!', 'success')
+                render_template('successfully_upload.html', 
                                    course=course, 
                                    student_id=student_id, 
                                    username=username, 
                                    role=role, profile_photo=profile_photo)
+            except sqlite3.Error as e:
+                logging.error("Database error during assignment upload: %s", str(e))
+                flash('An error occurred while uploading the assignment. Please try again later.', 'warning')
+            finally:
+                conn.close()
 
-        return "No file uploaded!", 400
+            return redirect(url_for('main.upload_assignment', student_id=student_id, course=course))
+
+        flash('No file uploaded!')
+        return redirect(url_for('main.upload_assignment', student_id=student_id, course=course))
 
     conn.close()
     return render_template('upload_assignment.html', 
@@ -300,7 +332,9 @@ def upload_assignment(student_id, course):
                            username=username, 
                            role=role, 
                            file_name=file_name, 
-                           deserialized_data=deserialized_data, profile_photo=profile_photo)
+                           deserialized_data=deserialized_data, 
+                           profile_photo=profile_photo)
+
 
 @main.route('/upload_photo/<student_id>', methods=['GET', 'POST'])
 @login_required

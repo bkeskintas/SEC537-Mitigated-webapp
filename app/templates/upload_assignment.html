@@ -235,6 +235,7 @@
             margin-bottom: 2rem;
 
         }
+
         .profPic {
             height: 100px;
             width: 70px;
@@ -294,6 +295,18 @@
             <div class="container">
                 <h3>Upload Your Assignment</h3>
                 <p>{{ course }}</p>
+                <!-- Flash Messages -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                <div id="flash-messages">
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% endwith %}
                 {% if file_name %}
                 <div>
                     <h5>Current Upload:</h5>
@@ -322,6 +335,14 @@
                         dropdownMenu.style.display = 'none';
                     }
                 }
+                    < script >
+                    setTimeout(() => {
+                        const flashMessages = document.getElementById('flash-messages');
+                        if (flashMessages) {
+                            flashMessages.style.display = 'none';
+                        }
+                    }, 5000); // 5000ms = 5 seconds
+            </script>
             </script>
 </body>
 
