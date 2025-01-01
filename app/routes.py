@@ -197,15 +197,32 @@ def grades(student_id):
 @login_required
 @is_admin
 def admin_dashboard():
-    conn = sqlite3.connect(DATABASE)
-    c = conn.cursor()
-    c.execute('''SELECT u.username, g.course, g.grade, g.comments, g.id 
-                 FROM grades g JOIN users u ON g.student_id = u.id''')
-    grades = c.fetchall()
-    conn.close()
+    try:
+        conn = sqlite3.connect(DATABASE)
+        c = conn.cursor()
+        # Use parameterized queries and limit data exposure
+        query = '''
+            SELECT u.username, g.course, g.grade, g.comments, g.id 
+            FROM grades g 
+            JOIN users u ON g.student_id = u.id
+            LIMIT ? OFFSET ?
+        '''
+        page = request.args.get('page', 1, type=int)
+        limit = 10  # Number of records per page
+        offset = (page - 1) * limit
+        c.execute(query, (limit, offset))
+        grades = c.fetchall()
+    except sqlite3.Error as e:
+        logging.error(f"Database error: {e}")
+        flash("An error occurred while fetching grades. Please try again later.", "danger")
+        return redirect(url_for('main.index'))
+    finally:
+        if conn:
+            conn.close()
 
+    # Log admin access
+    logging.info(f"Admin {session['username']} accessed the admin dashboard.")
     return render_template('admin_dashboard.html', grades=grades)
-
 
 @main.route('/admin/edit/<grade_id>', methods=['GET', 'POST'])
 @login_required
