@@ -274,7 +274,8 @@
             transition: background-color 0.3s ease;
             margin: 0 auto;
         }
-        .logbtn{
+
+        .logbtn {
             border: none;
             padding-left: 2rem;
             background-color: white;
@@ -328,7 +329,7 @@
                         <a href="{{ url_for('main.upload_photo', student_id=student_id) }}">Update Profile Photo</a>
                         <hr>
                         <form action="{{ url_for('main.logout') }}" method="POST" style="display: inline;">
-                            <button type="submit" class = "logbtn">
+                            <button type="submit" class="logbtn">
                                 <i class="fas fa-sign-out-alt"></i> Log out
                             </button>
                         </form>
@@ -342,6 +343,18 @@
         </div>
         <div class="wrapper">
             <div class="header">Edit Grade for {{ grade_data[0] }}</div>
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div id="flash-messages">
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
             <form method="POST">
                 <label for="grade">Grade:</label><br>
                 <input type="text" id="grade" name="grade" value="{{ grade_data[1] }}" required><br><br>
@@ -351,6 +364,7 @@
 
                 <button type="submit">Save Changes</button>
             </form>
+            
         </div>
         <!-- JavaScript to Toggle the Dropdown -->
         <script>
@@ -367,6 +381,14 @@
                     dropdownMenu.style.display = 'none';
                 }
             }
+
+            setTimeout(() => {
+                const flashMessages = document.getElementById('flash-messages');
+                if (flashMessages) {
+                    flashMessages.style.display = 'none';
+                }
+            }, 5000); // 5000ms = 5 seconds
+
         </script>
 </body>
 

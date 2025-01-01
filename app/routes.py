@@ -14,7 +14,7 @@ from .forms import RegistrationForm
 import socket
 import magic
 from werkzeug.utils import secure_filename
-
+from wtforms.validators import ValidationError
 
 main = Blueprint('main', __name__)
 
@@ -211,23 +211,49 @@ def admin_dashboard():
 @login_required
 @is_admin
 def edit_grade(grade_id):
+    try:
+        grade_id = int(grade_id)  # Ensure grade_id is an integer
+    except ValueError:
+        abort(400)  # Bad Request
+
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
 
     if request.method == 'POST':
-        grade = request.form['grade']
-        comments = request.form['comments']
+        grade = request.form.get('grade', '').strip()
+        comments = request.form.get('comments', '').strip()
 
+        if grade not in ['A', 'B', 'C', 'D', 'F']:
+            flash("Invalid grade!", "danger")
+            return redirect(url_for('main.edit_grade', grade_id=grade_id))
+
+        if not comments:
+            flash("Comments cannot be empty!", "danger")
+            return redirect(url_for('main.edit_grade', grade_id=grade_id))
+
+        # Log the original data
+        c.execute("SELECT grade, comments FROM grades WHERE id=?", (grade_id,))
+        original_data = c.fetchone()
+
+        # Update the grade
         c.execute("UPDATE grades SET grade=?, comments=? WHERE id=?", (grade, comments, grade_id))
         conn.commit()
         conn.close()
-        logging.info(f"Grade updated for grade_id: {grade_id} by admin: {session['username']}")
+
+        logging.info(f"Admin {session['username']} updated grade ID {grade_id}. Original data: {original_data}. New data: Grade={grade}, Comments={comments}.")
+        flash("Grade updated successfully!", "success")
         return redirect(url_for('main.admin_dashboard'))
-    
+
     c.execute("SELECT course, grade, comments FROM grades WHERE id=?", (grade_id,))
     grade_data = c.fetchone()
     conn.close()
+
+    if not grade_data:
+        flash("Grade not found!", "danger")
+        return redirect(url_for('main.admin_dashboard'))
+
     return render_template('edit_grade.html', grade_data=grade_data)
+
 
 @main.route('/logout', methods=['POST'])
 def logout():
