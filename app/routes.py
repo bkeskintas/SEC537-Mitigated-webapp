@@ -229,10 +229,11 @@ def edit_grade(grade_id):
     conn.close()
     return render_template('edit_grade.html', grade_data=grade_data)
 
-@main.route('/logout')
+@main.route('/logout', methods=['POST'])
 def logout():
     session.clear()
     logging.info("User logged out.")
+    flash("You have been logged out successfully.", "info")
     return redirect("/")
 
 @main.route('/student/<student_id>/upload_assignment/<course>', methods=['GET', 'POST'])

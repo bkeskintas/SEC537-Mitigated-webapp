@@ -248,6 +248,11 @@
             margin-left: 1rem;
 
         }
+        .logbtn{
+            border: none;
+            padding-left: 2rem;
+            background-color: white;
+        }
 
     </style>
 </head>
@@ -284,7 +289,11 @@
                         <a href="#">Private files</a>
                         <a href="{{ url_for('main.upload_photo', student_id=student_id) }}">Update Profile Photo</a>
                         <hr>
-                        <a href="/logout"><i class="fas fa-sign-out-alt"></i> Log out</a>
+                        <form action="{{ url_for('main.logout') }}" method="POST" style="display: inline;">
+                            <button type="submit" class = "logbtn">
+                                <i class="fas fa-sign-out-alt"></i> Log out
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
