@@ -153,23 +153,39 @@ def register():
 @is_user
 @is_current_user
 def student_dashboard(student_id):
-    username=session['username'] 
-    role=  session['role'] 
-    conn = sqlite3.connect(DATABASE)
-    c = conn.cursor()
-    role = session['role']
-    # Parameterized query to fetch grades for the logged-in student
-    c.execute("SELECT course, grade, comments FROM grades WHERE student_id=?", (student_id,))
-    courses = c.fetchall()
-    c = conn.cursor()
-    c.execute('SELECT profile_photo FROM users WHERE id = ?', (student_id,))
+    try:
+        student_id = int(student_id)
+        
+        username = session['username']
+        role = session['role']
 
-    result = c.fetchone()
-    if result:
-        profile_photo = result[0]
-    conn.close()
+        conn = sqlite3.connect(DATABASE)
+        c = conn.cursor()
 
-    return render_template('student_dashboard.html', courses=courses, username=username, student_id=student_id, role=role, profile_photo=profile_photo)
+        c.execute("SELECT course, grade, comments FROM grades WHERE student_id=?", (student_id,))
+        courses =  c.fetchall()
+
+        c.execute("SELECT profile_photo FROM users WHERE id=?", (student_id,))
+        result = c.fetchone()
+        profile_photo = result[0] if result else None
+
+    except ValueError:
+        abort(400)  #invalid student_id format
+    except sqlite3.Error as e:
+        logging.error(f"Database error: {e}")
+        flash("An error occurred while fetching your data. Please try again later.", "danger")
+        return redirect(url_for('main.index'))
+    finally:
+        conn.close()
+
+    return render_template(
+        'student_dashboard.html',
+        courses=courses,
+        username=username,
+        student_id=student_id,
+        role=role,
+        profile_photo=profile_photo
+    )
 
 @main.route('/student/<student_id>/grades')
 @login_required
@@ -178,19 +194,36 @@ def student_dashboard(student_id):
 def grades(student_id):
     username = session.get('username')
     role = session.get('role')
-    conn = sqlite3.connect(DATABASE)
-    c = conn.cursor()
-    c.execute("SELECT course, grade, comments FROM grades WHERE student_id=?", (student_id,))
-    courses = c.fetchall()
-    c = conn.cursor()
-    c.execute('SELECT profile_photo FROM users WHERE id = ?', (student_id,))
 
-    result = c.fetchone()
-    if result:
-        profile_photo = result[0]
-    conn.close()
+    try:
+        student_id = int(student_id)
 
-    return render_template('grades.html', courses=courses, username=username, student_id=student_id, profile_photo=profile_photo, role=role)
+        conn = sqlite3.connect(DATABASE)
+        c = conn.cursor()
+
+        query = "SELECT course, grade, comments FROM grades WHERE student_id=?"
+        c.execute(query, (student_id,))
+        courses = c.fetchall()
+
+        c.execute("SELECT profile_photo FROM users WHERE id=?", (student_id,))
+        result = c.fetchone()
+        profile_photo = result[0] if result else None
+
+    except sqlite3.Error as e:
+        logging.error(f"Database error: {e}")
+        flash("An error occurred while fetching grades. Please try again later.", "danger")
+        return redirect(url_for('main.index'))
+    finally:
+        conn.close()
+
+    return render_template(
+        'grades.html', 
+        courses=courses, 
+        username=username, 
+        student_id=student_id, 
+        profile_photo=profile_photo, 
+        role=role
+    )
 
 
 @main.route('/admin')
@@ -200,7 +233,6 @@ def admin_dashboard():
     try:
         conn = sqlite3.connect(DATABASE)
         c = conn.cursor()
-        # Use parameterized queries and limit data exposure
         query = '''
             SELECT u.username, g.course, g.grade, g.comments, g.id 
             FROM grades g 
@@ -220,7 +252,6 @@ def admin_dashboard():
         if conn:
             conn.close()
 
-    # Log admin access
     logging.info(f"Admin {session['username']} accessed the admin dashboard.")
     return render_template('admin_dashboard.html', grades=grades)
 
@@ -229,9 +260,9 @@ def admin_dashboard():
 @is_admin
 def edit_grade(grade_id):
     try:
-        grade_id = int(grade_id)  # Ensure grade_id is an integer
+        grade_id = int(grade_id)
     except ValueError:
-        abort(400)  # Bad Request
+        abort(400)  #Bad Request
 
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
@@ -248,11 +279,9 @@ def edit_grade(grade_id):
             flash("Comments cannot be empty!", "danger")
             return redirect(url_for('main.edit_grade', grade_id=grade_id))
 
-        # Log the original data
         c.execute("SELECT grade, comments FROM grades WHERE id=?", (grade_id,))
         original_data = c.fetchone()
 
-        # Update the grade
         c.execute("UPDATE grades SET grade=?, comments=? WHERE id=?", (grade, comments, grade_id))
         conn.commit()
         conn.close()
@@ -283,7 +312,7 @@ def logout():
 @login_required
 @is_user
 @is_current_user
-@limiter.limit("5 per minute", key_func=get_remote_address)  # Rate limiting
+@limiter.limit("5 per minute", key_func=get_remote_address)
 def upload_assignment(student_id, course):
     username = session.get('username')
     role = session.get('role')
@@ -292,13 +321,13 @@ def upload_assignment(student_id, course):
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
 
-    # Fetch the current profile photo
+    #fetch the current profile photo
     c.execute('SELECT profile_photo FROM users WHERE id = ?', (student_id,))
     result = c.fetchone()
     if result:
         profile_photo = result[0]
 
-    # Check if an assignment already exists for this student and course
+    #check if an assignment already exists for this student and course
     c.execute("SELECT file_name, file_data FROM assignments WHERE student_id=? AND course=?", (student_id, course))
     existing_assignment = c.fetchone()
 
@@ -307,43 +336,43 @@ def upload_assignment(student_id, course):
     if existing_assignment:
         file_name = existing_assignment[0]  # Existing file name
         try:
-            # Secure Deserialization
+            #secure Deserialization
             deserialized_data = json.loads(existing_assignment[1])
         except json.JSONDecodeError:
             logging.error("Deserialization failed for student_id: %s, course: %s", student_id, course)
-            deserialized_data = None  # Handle securely without exposing errors
+            deserialized_data = None  #handle securely without exposing errors
 
     if request.method == 'POST':
         uploaded_file = request.files.get('file')
 
         if uploaded_file:
-            # Ensure the file has an allowed extension
+            #ensure the file has an allowed extension
             file_extension = uploaded_file.filename.rsplit('.', 1)[1].lower() if '.' in uploaded_file.filename else ''
             if file_extension not in ALLOWED_EXTENSIONS:
                 flash('Invalid file type. Only PDF, DOCX and PNG are allowed!', 'warning')
                 return redirect(url_for('main.upload_assignment', student_id=student_id, course=course))
 
-            # Validate file size
-            uploaded_file.seek(0, os.SEEK_END)  # Move to end of file
-            file_size = uploaded_file.tell()  # Get file size
-            uploaded_file.seek(0)  # Reset file pointer to the beginning
+            #validate file size
+            uploaded_file.seek(0, os.SEEK_END)  #move to end of file
+            file_size = uploaded_file.tell()  #get file size
+            uploaded_file.seek(0)  #reset file pointer to the beginning
             if file_size > MAX_FILE_SIZE:
                 flash('File size exceeds the 10 MB limit!', 'warning')
                 return redirect(url_for('main.upload_assignment', student_id=student_id, course=course))
 
-            # Validate MIME type using python-magic
+            #validate MIME type using python-magic
             mime = magic.Magic(mime=True)
-            mime_type = mime.from_buffer(uploaded_file.read(2048))  # Read the first 2 KB for MIME validation
-            uploaded_file.seek(0)  # Reset file pointer
+            mime_type = mime.from_buffer(uploaded_file.read(2048))  #read the first 2 KB for MIME validation
+            uploaded_file.seek(0)  #reset file pointer
             if mime_type not in {'application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'}:
                 flash('Invalid file type. Only PDF and DOCX are allowed!', 'warning')
                 return redirect(url_for('main.upload_assignment', student_id=student_id, course=course))
 
-            # Serialize file data securely
-            serialized_data = json.dumps(uploaded_file.read().decode('latin1'))  # Using safe serialization
-            file_name = secure_filename(uploaded_file.filename)  # Prevent directory traversal attacks
+            #serrialize file data securely
+            serialized_data = json.dumps(uploaded_file.read().decode('latin1'))  #Using safe serialization
+            file_name = secure_filename(uploaded_file.filename)  #prevent directory traversal attacks
 
-            # Insert or update assignment
+            #insert or update assignment
             try:
                 if existing_assignment:
                     c.execute("UPDATE assignments SET file_data=?, file_name=? WHERE student_id=? AND course=?", 
@@ -383,7 +412,7 @@ def upload_assignment(student_id, course):
 @main.route('/upload_photo/<student_id>', methods=['GET', 'POST'])
 @login_required
 @is_current_user
-@limiter.limit("5 per minute", key_func=get_remote_address)  # Rate limiting
+@limiter.limit("5 per minute", key_func=get_remote_address)  #rate limiting
 def upload_photo(student_id):
     username = session.get('username')
     role = session.get('role')
@@ -392,7 +421,7 @@ def upload_photo(student_id):
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
 
-    # Fetch the current profile photo
+    #fetch the current profile photo
     c.execute('SELECT profile_photo FROM users WHERE id = ?', (student_id,))
     result = c.fetchone()
     if result:
@@ -403,23 +432,23 @@ def upload_photo(student_id):
         photo_url = request.form.get('photo_url')
         if photo_url:
             try:
-                # Validate the URL before making a request
+                #validate the URL before making a request
                 if not photo_url.lower().startswith(('http://', 'https://')):
                     flash('Invalid URL! Only HTTP/HTTPS URLs are allowed.')
                     return redirect(url_for('main.upload_photo', student_id=student_id))
 
-                # Advanced URL validation using stricter regex
+                #URL validation using stricter regex
                 url_regex = r'^https?://[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(/.*)?$'
                 if not re.match(url_regex, photo_url):
                     flash('Invalid URL format.')
                     return redirect(url_for('main.upload_photo', student_id=student_id))
 
-                # Perform DNS resolution and check for private IPs
+                #perform DNS resolution and check for private IPs
                 try:
                     domain = photo_url.split('/')[2]  # Extract domain from URL
                     ip_address = socket.gethostbyname(domain)  # DNS resolution
 
-                    # Check for private IP addresses
+                    #check for private IP addresses
                     if ip_address.startswith(("127.", "192.168.", "10.", "169.254.")):
                         flash('URL points to a private network address. Not allowed!')
                         return redirect(url_for('main.upload_photo', student_id=student_id))
@@ -427,30 +456,30 @@ def upload_photo(student_id):
                     flash('Failed to resolve the domain. URL might be invalid.')
                     return redirect(url_for('main.upload_photo', student_id=student_id))
 
-                # Fetch the image data with a stricter timeout
-                response = requests.get(photo_url, timeout=2)  # Shorter timeout
+                #fetch the image data with a stricter timeout
+                response = requests.get(photo_url, timeout=2) 
                 response.raise_for_status()
 
-                # Check if the response is an image
+                #check if the response is an image
                 if 'image' not in response.headers.get('Content-Type', ''):
                     flash('The URL does not point to an image!')
                     return redirect(url_for('main.upload_photo', student_id=student_id))
 
                 file_data = response.content
 
-                # Validate image type using robust library (python-magic)
+                #validate image type using robust library (python-magic)
                 mime = magic.Magic(mime=True)
                 file_type = mime.from_buffer(file_data)
                 if file_type not in ['image/jpeg', 'image/png']:
                     flash('Invalid image type! Only JPEG and PNG are allowed.')
                     return redirect(url_for('main.upload_photo', student_id=student_id))
 
-                # Limit the file size to prevent DoS
+                #limit the file size to prevent DoS
                 if len(file_data) > 2 * 1024 * 1024:  # 2 MB limit
                     flash('Image size exceeds the 2 MB limit.')
                     return redirect(url_for('main.upload_photo', student_id=student_id))
 
-                # Store the image in the database
+                #store the image in the database
                 conn = sqlite3.connect(DATABASE)
                 c = conn.cursor()
                 c.execute('UPDATE users SET profile_photo = ? WHERE id = ?', (file_data, student_id))
@@ -480,7 +509,6 @@ def get_profile_photo(student_id):
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
 
-    # Fetch the profile photo from the database
     c.execute('SELECT profile_photo FROM users WHERE id = ?', (student_id,))
     result = c.fetchone()
     conn.close()
@@ -489,5 +517,4 @@ def get_profile_photo(student_id):
         # Return the binary data as an image
         return Response(result[0], mimetype='image/jpeg')
     else:
-        # Return a default image if no profile photo is found
         return redirect(url_for('static', filename='user.png'))
