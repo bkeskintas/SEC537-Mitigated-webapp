@@ -1,0 +1,10 @@
+INFO:root:Inserted user: admin
+INFO:root:Inserted user: duygu
+INFO:root:Inserted user: burak
+INFO:root:Inserted grade for student_id 2 in course Human Computer Interaction
+INFO:root:Inserted grade for student_id 2 in course Cybersecurity Practices and App.
+INFO:root:Inserted grade for student_id 2 in course Fundamentals of Computing
+INFO:root:Inserted grade for student_id 2 in course Math
+INFO:root:Inserted grade for student_id 2 in course Physics
+INFO:root:Inserted grade for student_id 3 in course Math
+INFO:root:Inserted grade for student_id 3 in course Chemistry
