@@ -6,6 +6,8 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_limiter.errors import RateLimitExceeded
 from dotenv import load_dotenv
+import flask_monitoringdashboard as dashboard
+from markupsafe import escape
 
 limiter = Limiter(
     key_func=get_remote_address,  # IP adresine göre sınırlandırma
@@ -28,26 +30,28 @@ def create_app():
     app.config['RECAPTCHA_SECRET_KEY'] = os.getenv('RECAPTCHA_SECRET_KEY')  # Recaptcha secret key
     app.config['VERIFY_URL'] = os.getenv('VERIFY_URL')  # Recaptcha verification URL
 
-
     limiter.init_app(app)  # Limiter ile Flask uygulamasını bağla
 
 
-    # Initialize database setup
+    # To initialize database setup
     from app.database import init_db
     init_db()
 
-    # Configure Logging
+    #Logging configuration
     logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-    # Register Routes
+    #Routes
     from app.routes import main
     app.register_blueprint(main)
 
-    # Global Error Handlers (Fail Securely)
+    #Error Handlers for Fail Securely
     @app.errorhandler(404)
     def global_page_not_found(e):
         logging.warning(f"Page not found: {request.path}")  # Log 404 errors for auditing
-        return render_template_string(f"The page '{request.path}' does not exist."), 404
+ 
+        sanitized_path = escape(request.path)  # Escapes all malicious characters
+        logging.warning(f"Page not found: {sanitized_path}")  # Log 404 errors for auditing
+        return render_template_string(f"The page '{sanitized_path}' does not exist."), 404
 
     @app.errorhandler(500)
     def global_internal_server_error(e):
@@ -60,10 +64,13 @@ def create_app():
         # Log 500 errors for auditing
         return render_template_string("Siteye aşırı seviyede istekte bulundunuz. Sonra tekrar deneyiniz."), 429
 
-    # Default route for testing
+    #default route for testing
     @app.route('/health', methods=['GET'])
     def health_check():
         return "Application is running securely!"
     
   
+    #To initialize Flask-MonitoringDashboard
+    dashboard.bind(app)
+
     return app

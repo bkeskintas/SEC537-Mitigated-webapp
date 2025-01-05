@@ -2151,3 +2151,394 @@ INFO:werkzeug:[33mPress CTRL+C to quit[0m
 INFO:werkzeug:172.18.0.1 - - [04/Jan/2025 19:50:21] "GET / HTTP/1.1" 200 -
 INFO:werkzeug:172.18.0.1 - - [04/Jan/2025 19:50:21] "GET /static/logo.png HTTP/1.1" 200 -
 INFO:werkzeug:172.18.0.1 - - [04/Jan/2025 19:50:21] "GET /static/navbar.png HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.51.16.228:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:18:44] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:18:44] "GET /static/logo.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:18:44] "GET /static/navbar.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:19:02] "[32mGET /dashboard HTTP/1.1[0m" 308 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:19:02] "[32mGET /dashboard/ HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:19:02] "GET /dashboard/login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:19:02] "GET /dashboard/static/css/main.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:19:02] "GET /dashboard/static/img/header.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:19:02] "GET /dashboard/static/js/app.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:19:02] "GET /dashboard/static/fonts/fa-solid-900.woff2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:19:04] "GET /dashboard/static/pages/overview.html HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:19:04] "GET /dashboard/static/img/favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:26:54] "[32mPOST /dashboard/login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:26:54] "GET /dashboard/ HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:26:54] "[36mGET /dashboard/static/css/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:26:54] "[36mGET /dashboard/static/js/app.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:26:54] "[36mGET /dashboard/static/fonts/fa-solid-900.woff2 HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:26:55] "GET /dashboard/static/elements/menu.html HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:26:55] "GET /dashboard/static/elements/modal.html HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:26:55] "[36mGET /dashboard/static/pages/overview.html HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:26:55] "GET /dashboard/api/custom_graphs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:26:55] "GET /dashboard/static/pages/telemetry.html HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:26:55] "GET /dashboard/telemetry/get_is_telemetry_answered HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:26:55] "GET /dashboard/api/overview HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:26:55] "[35m[1mGET /dashboard/api/deploy_details HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:27:09] "[35m[1mPOST /dashboard/telemetry/accept_telemetry_consent HTTP/1.1[0m" 204 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:27:14] "GET /dashboard/static/pages/plotly_graph.html HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:27:14] "GET /dashboard/static/elements/endpointDetails.html HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:27:14] "GET /dashboard/static/elements/monitorLevel.html HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:27:16] "GET /dashboard/api/hourly_load/2024-12-22/2025-01-05 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:27:16] "GET /dashboard/api/endpoints_hits HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:27:16] "GET /dashboard/api/versions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:27:16] "POST /dashboard/api/multi_version HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:27:20] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:27:20] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:27:20] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:root:Login successful for user: duygu
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:27:43] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:27:43] "GET /student/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:27:43] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:27:43] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:27:43] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:27:43] "GET /static/bg.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:27:48] "GET /dashboard/api/hourly_load/2024-12-22/2025-01-05 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:27:49] "GET /dashboard/telemetry/get_is_telemetry_answered HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:27:49] "GET /dashboard/api/overview HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:27:49] "[35m[1mGET /dashboard/api/deploy_details HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:28:00] "GET /dashboard/static/pages/reporting.html HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:28:01] "GET /dashboard/api/endpoints_hits HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:28:02] "POST /dashboard/api/api_performance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:28:02] "GET /dashboard/api/versions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:28:02] "GET /dashboard/api/endpoints_hits HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:28:03] "POST /dashboard/api/multi_version HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:28:03] "GET /dashboard/api/requests/2024-12-26/2025-01-05 HTTP/1.1" 200 -
+WARNING:root:Page not found: /<script>alert("xss")</script>
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:30:06] "[33mGET /<script>alert("xss")</script> HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:31:04] "GET /dashboard/api/endpoints_hits HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:31:04] "GET /dashboard/api/versions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:31:05] "POST /dashboard/api/multi_version HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:31:07] "GET /dashboard/api/hourly_load/2024-12-22/2025-01-05 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:31:09] "GET /dashboard/api/requests/2024-12-26/2025-01-05 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:37:12] "GET /dashboard/telemetry/get_is_telemetry_answered HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:37:12] "GET /dashboard/api/overview HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:37:12] "[35m[1mGET /dashboard/api/deploy_details HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:38:54] "GET /dashboard/api/hourly_load/2024-12-22/2025-01-05 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:38:57] "GET /dashboard/api/requests/2024-12-26/2025-01-05 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:03] "GET /dashboard/api/endpoints_hits HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:03] "POST /dashboard/api/api_performance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:16] "GET /student/2/upload_assignment/Human%20Computer%20Interaction HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:16] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:16] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:16] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:23] "[32mPOST /student/2/upload_assignment/Human%20Computer%20Interaction HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:23] "GET /student/2/upload_assignment/Human%20Computer%20Interaction HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:23] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:23] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:23] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:25] "GET /student/2/upload_assignment/Human%20Computer%20Interaction HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:27] "GET /student/2/upload_assignment/Cybersecurity%20Practices%20and%20App. HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:27] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:27] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:27] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:flask-limiter:ratelimit 5 per 1 minute (127.0.0.1) exceeded at endpoint: main.upload_assignment
+ERROR:root:Too many attempts from user.
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:29] "[31m[1mGET /student/2/upload_assignment/Human%20Computer%20Interaction HTTP/1.1[0m" 429 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:34] "GET /dashboard/api/hourly_load/2024-12-22/2025-01-05 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:35] "GET /dashboard/api/versions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:35] "GET /dashboard/api/endpoints_hits HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:35] "POST /dashboard/api/multi_version HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Jan/2025 19:39:36] "GET /dashboard/api/requests/2024-12-26/2025-01-05 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 00:38:29] "[32mGET /dashboard/daily_utilization HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 00:38:29] "GET /dashboard/login HTTP/1.1" 200 -
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.138:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:12:41] "GET / HTTP/1.1" 200 -
+INFO:root:Login successful for user: duygu
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:00] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:00] "GET /student/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:00] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:03] "GET /student/2/upload_assignment/Cybersecurity%20Practices%20and%20App. HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:03] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:07] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:12] "[32mGET /dashboard HTTP/1.1[0m" 308 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:12] "[32mGET /dashboard/ HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:12] "GET /dashboard/login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:13] "GET /dashboard/static/css/main.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:13] "GET /dashboard/static/img/header.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:13] "GET /dashboard/static/js/app.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:13] "GET /dashboard/static/fonts/fa-solid-900.woff2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:13] "GET /dashboard/static/pages/overview.html HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:13] "GET /dashboard/static/img/favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:19] "[32mPOST /dashboard/login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:19] "GET /dashboard/ HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:19] "[36mGET /dashboard/static/css/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:19] "[36mGET /dashboard/static/js/app.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:19] "GET /dashboard/static/elements/menu.html HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:19] "GET /dashboard/static/elements/modal.html HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:19] "[36mGET /dashboard/static/pages/overview.html HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:19] "GET /dashboard/api/custom_graphs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:19] "GET /dashboard/static/pages/telemetry.html HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:19] "GET /dashboard/telemetry/get_is_telemetry_answered HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:21] "[35m[1mGET /dashboard/api/deploy_details HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:21] "GET /dashboard/api/overview HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:26] "GET /dashboard/static/pages/plotly_graph.html HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:26] "GET /dashboard/static/elements/endpointDetails.html HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:26] "GET /dashboard/static/elements/monitorLevel.html HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:26] "GET /dashboard/api/hourly_load/2024-12-23/2025-01-06 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:28] "GET /dashboard/telemetry/get_is_telemetry_answered HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:28] "GET /dashboard/api/overview HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:28] "[35m[1mGET /dashboard/api/deploy_details HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:29] "GET /dashboard/api/requests/2024-12-27/2025-01-06 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:32] "GET /dashboard/api/endpoints_hits HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:32] "POST /dashboard/api/api_performance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:13:33] "GET /dashboard/static/pages/reporting.html HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:56:28] "[31m[1mGET /student/2 HTTP/1.1[0m" 401 -
+WARNING:root:Page not found: /<script>alert("xss")</script>
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 01:56:48] "[33mGET /<script>alert("xss")</script> HTTP/1.1[0m" 404 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\__init__.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\__init__.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+WARNING:root:Page not found: /<script>alert("xss")</script>
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:01:48] "[33mGET /<script>alert("xss")</script> HTTP/1.1[0m" 404 -
+WARNING:root:Page not found: /<script>alert("xss")</script>
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:01:51] "[33mGET /<script>alert("xss")</script> HTTP/1.1[0m" 404 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\__init__.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\__init__.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\__init__.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\__init__.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\__init__.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\__init__.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\__init__.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\__init__.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\__init__.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\__init__.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.18.0.2:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:24] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:24] "GET /static/logo.png HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:24] "GET /static/navbar.png HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:30] "[32mGET /dashboard/ HTTP/1.1[0m" 302 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:30] "GET /dashboard/login HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:31] "GET /dashboard/static/css/main.css HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:31] "GET /dashboard/static/img/header.png HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:31] "GET /dashboard/static/js/app.js HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:31] "GET /dashboard/static/fonts/fa-solid-900.woff2 HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:32] "GET /dashboard/static/pages/overview.html HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:36] "[32mPOST /dashboard/login HTTP/1.1[0m" 302 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:36] "GET /dashboard/ HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:36] "[36mGET /dashboard/static/css/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:36] "[36mGET /dashboard/static/js/app.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:36] "GET /dashboard/static/elements/modal.html HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:36] "GET /dashboard/static/elements/menu.html HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:36] "[36mGET /dashboard/static/pages/overview.html HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:36] "GET /dashboard/api/custom_graphs HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:36] "GET /dashboard/static/pages/telemetry.html HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:37] "GET /dashboard/telemetry/get_is_telemetry_answered HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:38] "GET /dashboard/api/deploy_details HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:38] "GET /dashboard/api/overview HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:41] "GET /dashboard/static/pages/plotly_graph.html HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:41] "GET /dashboard/static/elements/endpointDetails.html HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:41] "GET /dashboard/static/elements/monitorLevel.html HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:41] "GET /dashboard/api/endpoints_hits HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:42] "POST /dashboard/api/api_performance HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:42] "GET /dashboard/api/requests/2024-12-27/2025-01-06 HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:44] "GET /dashboard/api/endpoints_hits HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:44] "GET /dashboard/api/versions HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:44] "GET /dashboard/static/pages/reporting.html HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:44] "POST /dashboard/api/multi_version HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:47] "GET /dashboard/api/versions HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:51] "GET /dashboard/api/versions HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:55] "GET /dashboard/telemetry/get_is_telemetry_answered HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:56] "GET /dashboard/api/deploy_details HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:29:56] "GET /dashboard/api/overview HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:22] "GET /dashboard/overview HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:22] "[36mGET /dashboard/static/css/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:22] "[36mGET /dashboard/static/js/app.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:22] "[36mGET /dashboard/static/fonts/fa-solid-900.woff2 HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:22] "[36mGET /dashboard/static/elements/modal.html HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:22] "[36mGET /dashboard/static/elements/menu.html HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:22] "[36mGET /dashboard/static/pages/overview.html HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:22] "[36mGET /dashboard/static/pages/telemetry.html HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:22] "GET /dashboard/static/img/favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:22] "GET /dashboard/telemetry/get_is_telemetry_answered HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:23] "GET /dashboard/api/custom_graphs HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:23] "GET /dashboard/api/deploy_details HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:23] "GET /dashboard/api/overview HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:26] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:27] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:27] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+WARNING:root:Failed login attempt for username: duygu
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:32] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:36] "[36mGET /dashboard/static/pages/plotly_graph.html HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:36] "[36mGET /dashboard/static/elements/endpointDetails.html HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:36] "[36mGET /dashboard/static/elements/monitorLevel.html HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:37] "GET /dashboard/api/hourly_load/2024-12-23/2025-01-06 HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:39] "GET /dashboard/telemetry/get_is_telemetry_answered HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:39] "GET /dashboard/api/deploy_details HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:39] "GET /dashboard/api/overview HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:41] "GET /dashboard/api/endpoints_hits HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:41] "GET /dashboard/api/versions HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:41] "POST /dashboard/api/multi_version HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:41] "GET /dashboard/api/requests/2024-12-27/2025-01-06 HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:43] "GET /dashboard/api/endpoints_hits HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:44] "POST /dashboard/api/api_performance HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:45] "[36mGET /dashboard/static/pages/reporting.html HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:49] "POST /dashboard/api/reporting/make_report/intervals HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:52] "GET /dashboard/telemetry/get_is_telemetry_answered HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:52] "GET /dashboard/api/deploy_details HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:52] "GET /dashboard/api/overview HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:57] "GET /dashboard/overview HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:57] "[36mGET /dashboard/static/css/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:57] "[36mGET /dashboard/static/js/app.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:57] "[36mGET /dashboard/static/fonts/fa-solid-900.woff2 HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:57] "[36mGET /dashboard/static/elements/modal.html HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:57] "[36mGET /dashboard/static/pages/overview.html HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:57] "[36mGET /dashboard/static/elements/menu.html HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:57] "[36mGET /dashboard/static/pages/telemetry.html HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:57] "[36mGET /dashboard/static/img/favicon.ico HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:57] "GET /dashboard/telemetry/get_is_telemetry_answered HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:57] "GET /dashboard/api/custom_graphs HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:57] "GET /dashboard/api/deploy_details HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:32:57] "GET /dashboard/api/overview HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:03] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:03] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:03] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:04] "GET /register HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:04] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:04] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:31] "POST /register HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:32] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:32] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:37] "[36mGET /dashboard/static/pages/plotly_graph.html HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:37] "[36mGET /dashboard/static/elements/endpointDetails.html HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:37] "[36mGET /dashboard/static/elements/monitorLevel.html HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:37] "GET /dashboard/api/hourly_load/2024-12-23/2025-01-06 HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:45] "GET /dashboard/api/versions HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:45] "GET /dashboard/api/endpoints_hits HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:46] "POST /dashboard/api/multi_version HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:48] "GET /dashboard/api/requests/2024-12-27/2025-01-06 HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:52] "GET /dashboard/telemetry/get_is_telemetry_answered HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:52] "GET /dashboard/api/deploy_details HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:52] "GET /dashboard/api/overview HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:59] "GET /dashboard/api/endpoints_hits HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:59] "POST /dashboard/api/api_performance HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:33:59] "[36mGET /dashboard/static/pages/reporting.html HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:34:01] "GET /dashboard/api/endpoints_hits HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:34:01] "POST /dashboard/api/api_performance HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:34:02] "GET /dashboard/api/requests/2024-12-27/2025-01-06 HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:34:03] "GET /dashboard/api/endpoints_hits HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:34:04] "POST /dashboard/api/api_performance HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:34:21] "GET /dashboard/static/pages/configuration.html HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:34:21] "GET /dashboard/api/users HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:34:21] "GET /dashboard/telemetry/get_is_telemetry_answered HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:34:22] "GET /dashboard/api/deploy_config HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:34:22] "GET /dashboard/api/deploy_details HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:34:40] "GET /dashboard/telemetry/get_is_telemetry_answered HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:34:41] "GET /dashboard/api/deploy_details HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [05/Jan/2025 23:34:41] "GET /dashboard/api/overview HTTP/1.1" 200 -
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.138:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:16] "[31m[1mGET /login HTTP/1.1[0m" 405 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:25] "GET /register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:25] "GET /static/logo.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:25] "GET /static/navbar.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:27] "GET /dashboard/api/hourly_load/2024-12-23/2025-01-06 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:29] "GET /dashboard/api/requests/2024-12-27/2025-01-06 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:31] "GET /dashboard/api/endpoints_hits HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:31] "POST /dashboard/api/api_performance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:33] "GET /dashboard/api/requests/2024-12-27/2025-01-06 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:39] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:39] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:39] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:41] "GET /dashboard/daily_utilization HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:41] "GET /dashboard/static/css/main.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:41] "GET /dashboard/static/js/app.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:41] "GET /dashboard/static/fonts/fa-solid-900.woff2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:42] "GET /dashboard/static/elements/modal.html HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:42] "GET /dashboard/static/elements/menu.html HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:42] "GET /dashboard/static/pages/plotly_graph.html HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:42] "GET /dashboard/api/custom_graphs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:42] "GET /dashboard/static/elements/endpointDetails.html HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:42] "GET /dashboard/api/requests/2024-12-27/2025-01-06 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:42] "GET /dashboard/static/img/favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 02:48:42] "GET /dashboard/static/elements/monitorLevel.html HTTP/1.1" 200 -
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.18.0.2:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
