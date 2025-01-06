@@ -15,6 +15,8 @@ import socket
 import magic
 from werkzeug.utils import secure_filename
 from wtforms.validators import ValidationError
+from jinja2.utils import urlize
+from time import perf_counter
 
 main = Blueprint('main', __name__)
 
@@ -62,13 +64,17 @@ def is_bot(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if request.method == 'POST':
-            response_verify=request.form["g-recaptcha-response"]
-            secretkey= current_app.config['RECAPTCHA_SECRET_KEY']
-            verifyurl = current_app.config['VERIFY_URL']
-            verify = requests.post(url=f'{verifyurl}?secret={secretkey}&response={response_verify}').json()
-            #curl -X POST -F "username=testuser" -F "password=testpass" -F "g-recaptcha-response=simulate_bot" http://localhost:5000/login
-            if not verify.get('success'):
-                logging.error(f"Captcha verification failed from ip address: {get_remote_address}")
+            try:
+                response_verify=request.form["g-recaptcha-response"]
+                secretkey= current_app.config['RECAPTCHA_SECRET_KEY']
+                verifyurl = current_app.config['VERIFY_URL']
+                verify = requests.post(url=f'{verifyurl}?secret={secretkey}&response={response_verify}').json()
+                #curl -X POST -F "username=testuser" -F "password=testpass" -F "g-recaptcha-response=simulate_bot" http://localhost:5000/login
+                if not verify.get('success'):
+                    logging.error(f"Captcha verification failed from ip address: {get_remote_address}")
+                    abort(403, "Captcha verification failed!!")
+            except Exception as e:
+                logging.error(f"Captcha verification failed from ip address: {get_remote_address}. Server error: {e}")
                 abort(403, "Captcha verification failed!!")
         return f(*args, **kwargs)
     return decorated_function
@@ -307,6 +313,17 @@ def logout():
     logging.info("User logged out.")
     flash("You have been logged out successfully.", "info")
     return redirect("/")
+
+@main.route('/lol')
+def lol_route():
+   for i in range(3):
+        text = "abc@" + "." * (i+1)*5000 + "!"
+   lenValue = len(text)
+   begin = perf_counter()
+   urlize(text)
+   DURATION = perf_counter() - begin
+   print(f"{lenValue}: took {DURATION} seconds!")  #Causes a ZeroDivisionError and trigger a stack trace
+   return f"Result: {DURATION}"
 
 @main.route('/student/<student_id>/upload_assignment/<course>', methods=['GET', 'POST'])
 @login_required
