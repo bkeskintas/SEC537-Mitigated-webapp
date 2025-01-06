@@ -2675,3 +2675,86 @@ INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 17:22:42] "[36mGET /static/logo.png HT
 INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 17:22:42] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
 INFO:apscheduler.scheduler:Scheduler has been shut down
 INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.18.0.2:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 20:38:22] "GET / HTTP/1.1" 200 -
+WARNING:root:Failed login attempt for username:  ' OR '1'='1' --
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 20:38:43] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+INFO:root:Login successful for user: admin
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 20:41:44] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:root:Admin admin accessed the admin dashboard.
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 20:41:44] "GET /admin HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 20:41:52] "GET /admin/edit/1 HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 20:41:58] "[32mPOST /admin/edit/1 HTTP/1.1[0m" 302 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 20:41:58] "GET /admin/edit/1 HTTP/1.1" 200 -
+INFO:root:Admin admin updated grade ID 1. Original data: ('A', 'Outstanding'). New data: Grade=A, Comments=<script>alert(“XSS”)</script>.
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 20:42:32] "[32mPOST /admin/edit/1 HTTP/1.1[0m" 302 -
+INFO:root:Admin admin accessed the admin dashboard.
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 20:42:32] "GET /admin HTTP/1.1" 200 -
+INFO:root:User logged out.
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 20:42:40] "[32mPOST /logout HTTP/1.1[0m" 302 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 20:42:40] "GET / HTTP/1.1" 200 -
+INFO:root:Login successful for user: duygu
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 20:42:52] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 20:42:53] "GET /student/2 HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 20:42:56] "GET /student/2/grades HTTP/1.1" 200 -
+INFO:root:User logged out.
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 20:43:09] "[32mPOST /logout HTTP/1.1[0m" 302 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 20:43:09] "GET / HTTP/1.1" 200 -
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.142:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 23:50:11] "GET / HTTP/1.1" 200 -
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.18.0.2:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 20:50:33] "GET / HTTP/1.1" 200 -
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.142:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 00:05:19] "GET / HTTP/1.1" 200 -
+WARNING:root:Invalid username format attempted: ' OR '1'='1' --
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 00:05:34] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+INFO:root:Login successful for user: duygu
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 00:06:02] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 00:06:02] "GET /student/2 HTTP/1.1" 200 -
+INFO:root:User logged out.
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 00:06:13] "[32mPOST /logout HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 00:06:13] "GET / HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.18.0.2:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m

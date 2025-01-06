@@ -91,21 +91,30 @@ def index():
 @limiter.limit("10 per hour", key_func=get_remote_address)
 @is_bot
 def login():
-    username = request.form['username']
-    password = request.form['password']
-    
-    conn = sqlite3.connect(DATABASE)
-    c = conn.cursor()
-    query = "SELECT * FROM users WHERE username=?"
-    c.execute(query, (username,))
-    user = c.fetchone()
-    conn.close()
+    username = request.form.get('username', '').strip()
+    password = request.form.get('password', '').strip()
+
+    #validate the username format (alphanumeric, underscores, or dashes, 3-20 characters)
+    if not re.match(r'^[a-zA-Z0-9_-]{3,20}$', username):
+        logging.warning(f"Invalid username format attempted: {username}")
+        return "Invalid username or password", 401
+
+    try:
+        conn = sqlite3.connect(DATABASE)
+        c = conn.cursor()
+
+        query = "SELECT id, username, password, role FROM users WHERE username=?"
+        c.execute(query, (username,))
+        user = c.fetchone()
+    finally:
+        conn.close()
 
     if user and bcrypt.checkpw(password.encode('utf-8'), user[2].encode('utf-8')):  # user[2] is the hashed password
-        session['username'] = user[1]  # Store username in session
+        session['username'] = user[1]  
         session['role'] = user[3]
-        session['student_id'] = user[0] # Store role in session
-        logging.info(f"Login successful for user: {username}")
+        session['student_id'] = user[0]  
+
+        logging.info("Login successful for user: %s", username)
 
         if user[3] == 'admin':
             return redirect(url_for('main.admin_dashboard'))
