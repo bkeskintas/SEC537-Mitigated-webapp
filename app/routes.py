@@ -1,6 +1,7 @@
 import json
 import os
 import sqlite3
+import bcrypt
 from flask import Blueprint, Response, current_app, render_template, request, redirect, url_for, session, abort, flash
 import logging
 import re
@@ -9,12 +10,10 @@ from werkzeug.security import check_password_hash
 from functools import wraps
 from . import limiter 
 from . import get_remote_address
-from werkzeug.security import generate_password_hash
 from .forms import RegistrationForm
 import socket
 import magic
 from werkzeug.utils import secure_filename
-from wtforms.validators import ValidationError
 from jinja2.utils import urlize
 from time import perf_counter
 
@@ -102,7 +101,7 @@ def login():
     user = c.fetchone()
     conn.close()
 
-    if user and check_password_hash(user[2], password):  # user[2] is the hashed password
+    if user and bcrypt.checkpw(password.encode('utf-8'), user[2].encode('utf-8')):  # user[2] is the hashed password
         session['username'] = user[1]  # Store username in session
         session['role'] = user[3]
         session['student_id'] = user[0] # Store role in session
@@ -123,7 +122,6 @@ def login():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        print("Form validated: ", form.validate_on_submit())
         username = request.form['username']
         password = request.form['password']
         confirm_password = request.form['confirm_password']
@@ -132,7 +130,7 @@ def register():
             flash("Passwords do not match", "danger")
             return render_template(REGISTER_HTML, captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
 
-        hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
         try:
             with sqlite3.connect(DATABASE) as conn:
                 c = conn.cursor()
@@ -150,7 +148,6 @@ def register():
         for field, errors in form.errors.items():
             for error in errors:
                 flash(f"Error in {getattr(form, field).label.text}: {error}", "danger")
-        print("Form errors: ", form.errors)
     return render_template(REGISTER_HTML, form=form, captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
 
 
@@ -322,7 +319,6 @@ def lol_route():
    begin = perf_counter()
    urlize(text)
    DURATION = perf_counter() - begin
-   print(f"{lenValue}: took {DURATION} seconds!")  #Causes a ZeroDivisionError and trigger a stack trace
    return f"Result: {DURATION}"
 
 @main.route('/student/<student_id>/upload_assignment/<course>', methods=['GET', 'POST'])

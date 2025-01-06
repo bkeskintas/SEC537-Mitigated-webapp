@@ -1,6 +1,7 @@
 import sqlite3
 from werkzeug.security import generate_password_hash
 import logging
+import bcrypt
 
 logging.basicConfig(filename='db_operations.log', level=logging.INFO)
 
@@ -39,9 +40,9 @@ def init_db():
     encrypt_method = 'pbkdf2:sha256'
     if c.fetchone()[0] == 0:  #only insert if the table is empty
         users = [
-            ('admin', generate_password_hash('Az09.IamAmin', method=encrypt_method), 'admin', None),
-            ('duygu', generate_password_hash('Az09.IamDuygu', method=encrypt_method), 'student', None),
-            ('burak', generate_password_hash('Az09.IamBurak', method=encrypt_method), 'student', None)
+            ('admin', bcrypt.hashpw('Az09.IamAdmin'.encode('utf-8'), bcrypt.gensalt()).decode('utf-8'), 'admin', None),
+            ('duygu', bcrypt.hashpw('Az09.IamDuygu'.encode('utf-8'), bcrypt.gensalt()).decode('utf-8'), 'student', None),
+            ('burak', bcrypt.hashpw('Az09.IamBurak'.encode('utf-8'), bcrypt.gensalt()).decode('utf-8'), 'student', None)
         ]
         for user in users:
             c.execute('INSERT INTO users (username, password, role, profile_photo) VALUES (?, ?, ?, ?)', user)

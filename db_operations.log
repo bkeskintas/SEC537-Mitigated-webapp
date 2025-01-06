@@ -2542,3 +2542,69 @@ INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a
  * Running on http://127.0.0.1:5000
  * Running on http://172.18.0.2:5000
 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:root:Inserted user: admin
+INFO:root:Inserted user: duygu
+INFO:root:Inserted user: burak
+INFO:root:Inserted grade for student_id 2 in course Human Computer Interaction
+INFO:root:Inserted grade for student_id 2 in course Cybersecurity Practices and App.
+INFO:root:Inserted grade for student_id 2 in course Fundamentals of Computing
+INFO:root:Inserted grade for student_id 2 in course Math
+INFO:root:Inserted grade for student_id 2 in course Physics
+INFO:root:Inserted grade for student_id 3 in course Math
+INFO:root:Inserted grade for student_id 3 in course Chemistry
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.142:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 17:02:26] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 17:02:26] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 17:02:26] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:root:Login successful for user: duygu
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 17:02:42] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 17:02:42] "GET /student/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 17:02:42] "[36mGET /static/user.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 17:02:42] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 17:02:42] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [06/Jan/2025 17:02:42] "[36mGET /static/bg.png HTTP/1.1[0m" 304 -
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.18.0.2:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:07:39] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:07:39] "GET /static/logo.png HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:07:39] "GET /static/navbar.png HTTP/1.1" 200 -
+INFO:root:Login successful for user: duygu
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:07:47] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:07:47] "GET /student/2 HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:07:47] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:07:47] "GET /static/user.png HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:07:47] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:07:47] "GET /static/bg.png HTTP/1.1" 200 -
+INFO:root:User logged out.
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:07:52] "[32mPOST /logout HTTP/1.1[0m" 302 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:07:52] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:07:52] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:07:52] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:07:54] "GET /register HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:07:54] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:07:54] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:08:11] "[32mPOST /register HTTP/1.1[0m" 302 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:08:11] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:08:11] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:08:11] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:root:Login successful for user: hello
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:08:23] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:08:23] "GET /student/4 HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:08:23] "[36mGET /static/user.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:08:23] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 14:08:23] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
