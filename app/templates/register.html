@@ -133,53 +133,38 @@
          document.getElementById("register").submit();
        }
 
-   document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('password').addEventListener('input', function() {
-            var password = this.value;
-            var strengthText = getPasswordStrength(password);
-            var strengthDiv = document.getElementById('password-strength');
-            strengthDiv.textContent = strengthText;
-            strengthDiv.className = getStrengthClass(strengthText);
+       document.addEventListener('DOMContentLoaded', function () {
+        const passwordInput = document.getElementById('password');
+        const requirements = {
+            length: document.getElementById('length-req'),
+            lowercase: document.getElementById('lowercase-req'),
+            uppercase: document.getElementById('uppercase-req'),
+            number: document.getElementById('number-req'),
+            special: document.getElementById('special-req')
+    };
+
+        passwordInput.addEventListener('input', function () {
+            const password = passwordInput.value;
+
+            // Şifre kriterlerini kontrol et
+            updateRequirement(requirements.length, password.length >= 8);
+            updateRequirement(requirements.lowercase, /[a-z]/.test(password));
+            updateRequirement(requirements.uppercase, /[A-Z]/.test(password));
+            updateRequirement(requirements.number, /\d/.test(password));
+            updateRequirement(requirements.special, /[@$!%*?&]/.test(password));
         });
 
-        function getPasswordStrength(password) {
-            var strength = 0;
-            if (password.length >= 8) strength++;
-            if (password.match(/[a-z]/)) strength++;
-            if (password.match(/[A-Z]/)) strength++;
-            if (password.match(/\d/)) strength++;
-            if (password.match(/[@$!%*?&]/)) strength++;
-            
-            switch (strength) {
-                case 0:
-                case 1:
-                    return 'Very Weak';
-                case 2:
-                    return 'Weak';
-                case 3:
-                    return 'Moderate';
-                case 4:
-                    return 'Almost Strong';
-                case 5:
-                    return 'Acceptable Strength';
+        function updateRequirement(element, isValid) {
+            // Kriter sağlanıyorsa yeşil, değilse kırmızı yap
+            if (isValid) {
+                element.classList.remove('text-danger');
+                element.classList.add('text-success');
+            } else {
+                element.classList.remove('text-success');
+                element.classList.add('text-danger');
             }
         }
-        
-        function getStrengthClass(strengthText) {
-            switch (strengthText) {
-                case 'Very Weak':
-                    return 'text-danger';
-                case 'Weak':
-                    return 'text-warning';
-                case 'Moderate':
-                    return 'text-info';
-                case 'Almost Strong':
-                    return 'text-primary';
-                case 'Acceptable Strength':
-                    return 'text-success';
-            }
-        }
-    });
+});
      </script>
 </head>
 
@@ -219,7 +204,14 @@
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    {{ form.password(class="form-control") }}
+                    {{ form.password(class="form-control", id="password") }}
+                    <ul id="password-requirements" class="mt-2 list-unstyled">
+                        <li id="length-req" class="text-danger">At least 8 characters</li>
+                        <li id="lowercase-req" class="text-danger">At least one lowercase letter</li>
+                        <li id="uppercase-req" class="text-danger">At least one uppercase letter</li>
+                        <li id="number-req" class="text-danger">At least one number</li>
+                        <li id="special-req" class="text-danger">At least one special character (@$!%*?&)</li>
+                    </ul>
                     <div id="password-strength" class="mt-2"></div>
                 </div>
                 <div class="mb-3">
