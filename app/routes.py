@@ -122,28 +122,47 @@ def login():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        username = request.form['username']
+        username = request.form['username'].strip()
         password = request.form['password']
         confirm_password = request.form['confirm_password']
 
-        if password != confirm_password:
-            flash("Passwords do not match", "danger")
-            return render_template(REGISTER_HTML, captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
+        #allow only alphanumeric and limited special characters for username
+        if not re.match(r"^[a-zA-Z0-9_.-]+$", username):
+            flash("Username contains invalid characters. Use only letters, numbers, and _.-", "danger")
+            return render_template(REGISTER_HTML, form=form, captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
 
-        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+        #validate password strength
+        if len(password) < 8 or not re.search(r"[A-Z]", password) or not re.search(r"[0-9]", password):
+            flash("Password must be at least 8 characters long and include an uppercase letter and a number.", "danger")
+            return render_template(REGISTER_HTML, form=form, captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
+
+        if password != confirm_password:
+            flash("Passwords do not match.", "danger")
+            return render_template(REGISTER_HTML, form=form, captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
+
+        try:
+            hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+        except Exception as e:
+            logging.error(f"Error during password hashing: {e}")
+            flash("An error occurred. Please try again later.", "danger")
+            return render_template(REGISTER_HTML, form=form, captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
+
         try:
             with sqlite3.connect(DATABASE) as conn:
                 c = conn.cursor()
-                c.execute("INSERT INTO users (username, password, role, profile_photo) VALUES (?, ?, ?, ?)", (username, hashed_password, 'student', None))
+                # Insert new user into the database
+                c.execute("INSERT INTO users (username, password, role, profile_photo) VALUES (?, ?, ?, ?)",
+                          (username, hashed_password, 'student', None))
                 conn.commit()
+                logging.info(f"New user registered: {username}")
             flash("Registration successful! You can now log in.", "success")
             return redirect(url_for('main.index'))
         except sqlite3.IntegrityError:
+            logging.warning(f"Username already exists: {username}")
             flash("Username already exists. Please choose another one.", "danger")
-            return render_template(REGISTER_HTML, form=form, captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
-        except sqlite3.OperationalError:
-            flash("There was an unexpected Error. Please try again later.", "danger")
-            return render_template(REGISTER_HTML, form=form, captchaKey=current_app.config['RECAPTCHA_SITE_KEY'])
+        except sqlite3.OperationalError as e:
+            logging.error(f"Database error during registration: {e}")
+            flash("An unexpected error occurred. Please try again later.", "danger")
     else:
         for field, errors in form.errors.items():
             for error in errors:
