@@ -3269,3 +3269,83 @@ WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 391-463-866
 INFO:apscheduler.scheduler:Scheduler has been shut down
 INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.51.16.228:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:08] "GET /student/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:08] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:08] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:08] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:08] "[36mGET /static/bg.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:09] "GET /student/2/upload_assignment/Human%20Computer%20Interaction HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:09] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:09] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:09] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:18] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:18] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:18] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:18] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:28] "[32mPOST /upload_photo/2 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:28] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:28] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:28] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:28] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:46] "[32mPOST /upload_photo/2 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:46] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:46] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:46] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:15:46] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.51.16.228:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:22:17] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:22:17] "GET /static/logo.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:22:17] "GET /static/navbar.png HTTP/1.1" 200 -
+INFO:root:Login successful for user: duygu
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:22:33] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:22:33] "GET /student/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:22:33] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:22:33] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:22:33] "GET /static/bg.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:22:33] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:22:36] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:22:36] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:22:36] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:22:36] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:22:54] "[32mPOST /upload_photo/2 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:22:54] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:22:54] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:22:54] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:22:54] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:23:14] "[32mPOST /upload_photo/2 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:23:14] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:23:14] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:23:14] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:23:14] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:23:51] "[32mPOST /upload_photo/2 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:23:51] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:23:51] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:23:51] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:23:51] "GET /get_profile_photo/2 HTTP/1.1" 200 -

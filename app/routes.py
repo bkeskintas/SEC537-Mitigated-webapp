@@ -489,7 +489,7 @@ def upload_photo(student_id):
                 #perform DNS resolution and check for private IPs
                 try:
                     ip_address = socket.gethostbyname(domain) # DNS resolution
-                    if ip_address.startswith(("127.", "192.168.", "10.", "169.254.")):
+                    if ip_address.startswith(("127.", "192.168.", "10.")):
                         flash('URL points to a private network address. Not allowed!')
                         return redirect(url_for('main.upload_photo', student_id=student_id))
                 except socket.gaierror:
