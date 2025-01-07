@@ -2758,3 +2758,514 @@ INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a
  * Running on http://127.0.0.1:5000
  * Running on http://172.18.0.2:5000
 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.142:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 00:15:27] "GET / HTTP/1.1" 200 -
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.18.0.2:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:15:41] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:15:42] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:15:42] "GET / HTTP/1.1" 200 -
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.18.0.2:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:26:18] "[31m[1mGET /student/2/grades HTTP/1.1[0m" 401 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:26:21] "GET / HTTP/1.1" 200 -
+WARNING:root:Invalid username format attempted: ' OR '1'='1' --
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:26:30] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+INFO:root:Login successful for user: admin
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:27:06] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:root:Admin admin accessed the admin dashboard.
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:27:06] "GET /admin HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:27:15] "GET /admin/edit/2 HTTP/1.1" 200 -
+INFO:root:Admin admin updated grade ID 2. Original data: ('A', 'Great job!'). New data: Grade=A, Comments=<script>alert(“XSS”)</script>.
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:27:19] "[32mPOST /admin/edit/2 HTTP/1.1[0m" 302 -
+INFO:root:Admin admin accessed the admin dashboard.
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:27:19] "GET /admin HTTP/1.1" 200 -
+INFO:root:User logged out.
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:27:24] "[32mPOST /logout HTTP/1.1[0m" 302 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:27:24] "GET / HTTP/1.1" 200 -
+INFO:root:Login successful for user: duygu
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:27:37] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:27:37] "GET /student/2 HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:27:40] "GET /student/2/grades HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:28:56] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:04] "[32mGET /dashboard/ HTTP/1.1[0m" 302 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:04] "GET /dashboard/login HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:04] "GET /dashboard/static/css/main.css HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:04] "GET /dashboard/static/img/header.png HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:04] "GET /dashboard/static/js/app.js HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:04] "GET /dashboard/static/fonts/fa-solid-900.woff2 HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:05] "GET /dashboard/static/pages/overview.html HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:22] "[32mPOST /dashboard/login HTTP/1.1[0m" 302 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:22] "GET /dashboard/ HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:22] "[36mGET /dashboard/static/css/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:22] "[36mGET /dashboard/static/js/app.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:22] "[36mGET /dashboard/static/fonts/fa-solid-900.woff2 HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:22] "GET /dashboard/static/elements/modal.html HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:22] "GET /dashboard/static/elements/menu.html HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:22] "[36mGET /dashboard/static/pages/overview.html HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:22] "GET /dashboard/static/pages/telemetry.html HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:22] "GET /dashboard/api/custom_graphs HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:22] "GET /dashboard/telemetry/get_is_telemetry_answered HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:23] "GET /dashboard/api/deploy_details HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:24] "GET /dashboard/api/overview HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:24] "GET /dashboard/static/elements/monitorLevel.html HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:38] "GET /dashboard/static/pages/plotly_graph.html HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:38] "GET /dashboard/static/elements/endpointDetails.html HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:38] "GET /dashboard/api/endpoints_hits HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:39] "POST /dashboard/api/api_performance HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:41] "GET /dashboard/api/requests/2024-12-28/2025-01-07 HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:43] "GET /dashboard/api/versions HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:43] "GET /dashboard/api/endpoints_hits HTTP/1.1" 200 -
+INFO:werkzeug:172.18.0.1 - - [06/Jan/2025 21:29:43] "POST /dashboard/api/multi_version HTTP/1.1" 200 -
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.142:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 00:58:12] "GET / HTTP/1.1" 200 -
+INFO:root:Login successful for user: duygu
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 00:59:00] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 00:59:00] "GET /student/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 00:59:01] "GET /student/2/upload_assignment/Human%20Computer%20Interaction HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 00:59:05] "GET /student/2/upload_assignment/Human%20Computer%20Interaction HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 00:59:17] "[32mPOST /student/2/upload_assignment/Human%20Computer%20Interaction HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 00:59:17] "GET /student/2/upload_assignment/Human%20Computer%20Interaction HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 00:59:31] "[35m[1mGET /student/2/upload_assignment/Human%20Computer%20Interaction HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 00:59:31] "[36mGET /student/2/upload_assignment/Human%20Computer%20Interaction?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 00:59:31] "[36mGET /student/2/upload_assignment/Human%20Computer%20Interaction?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 00:59:31] "GET /student/2/upload_assignment/Human%20Computer%20Interaction?__debugger__=yes&cmd=resource&f=console.png&s=RtIJ3QnAMP5c7Chaxhf3 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 00:59:31] "[36mGET /student/2/upload_assignment/Human%20Computer%20Interaction?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:flask-limiter:ratelimit 5 per 1 minute (127.0.0.1) exceeded at endpoint: main.upload_assignment
+ERROR:root:Too many attempts from user.
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 00:59:35] "[31m[1mGET /student/2/upload_assignment/Human%20Computer%20Interaction HTTP/1.1[0m" 429 -
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.142:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 00:59:55] "GET / HTTP/1.1" 200 -
+INFO:root:Login successful for user: duygu
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:00:02] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:00:02] "GET /student/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:00:03] "[35m[1mGET /student/2/upload_assignment/Human%20Computer%20Interaction HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:00:03] "[36mGET /student/2/upload_assignment/Human%20Computer%20Interaction?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:00:03] "[36mGET /student/2/upload_assignment/Human%20Computer%20Interaction?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:00:03] "GET /student/2/upload_assignment/Human%20Computer%20Interaction?__debugger__=yes&cmd=resource&f=console.png&s=GGeNnomMIAMf6ZMvdIRs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:00:03] "[36mGET /student/2/upload_assignment/Human%20Computer%20Interaction?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:00:35] "[35m[1mGET /student/2/upload_assignment/Human%20Computer%20Interaction HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:00:35] "[36mGET /student/2/upload_assignment/Human%20Computer%20Interaction?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:00:35] "[36mGET /student/2/upload_assignment/Human%20Computer%20Interaction?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:00:35] "[36mGET /student/2/upload_assignment/Human%20Computer%20Interaction?__debugger__=yes&cmd=resource&f=console.png&s=GGeNnomMIAMf6ZMvdIRs HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:00:50] "GET /student/2/upload_assignment/Cybersecurity%20Practices%20and%20App. HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:01:13] "[32mPOST /student/2/upload_assignment/Cybersecurity%20Practices%20and%20App. HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:01:13] "GET /student/2/upload_assignment/Cybersecurity%20Practices%20and%20App. HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:01:15] "GET /student/2/upload_assignment/Cybersecurity%20Practices%20and%20App. HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:01:52] "[35m[1mGET /student/2/upload_assignment/Human%20Computer%20Interaction HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:01:52] "[36mGET /student/2/upload_assignment/Human%20Computer%20Interaction?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:01:52] "[36mGET /student/2/upload_assignment/Human%20Computer%20Interaction?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:01:52] "[36mGET /student/2/upload_assignment/Human%20Computer%20Interaction?__debugger__=yes&cmd=resource&f=console.png&s=GGeNnomMIAMf6ZMvdIRs HTTP/1.1[0m" 304 -
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.142:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:03:01] "GET /student/2/upload_assignment/Fundamentals%20of%20Computing HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:03:04] "GET /student/2/upload_assignment/Human%20Computer%20Interaction HTTP/1.1" 200 -
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.142:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:22:19] "GET / HTTP/1.1" 200 -
+INFO:root:Login successful for user: duygu
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:22:25] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:22:25] "GET /student/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:22:27] "GET /student/2/upload_assignment/Human%20Computer%20Interaction HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:22:35] "[32mPOST /student/2/upload_assignment/Human%20Computer%20Interaction HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:22:35] "GET /student/2/upload_assignment/Human%20Computer%20Interaction HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:24:20] "[31m[1mPOST /student/2/upload_assignment/Human%20Computer%20Interaction HTTP/1.1[0m" 413 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:24:32] "GET /student/2/upload_assignment/Human%20Computer%20Interaction HTTP/1.1" 200 -
+INFO:root:User logged out.
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:30:39] "[32mPOST /logout HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:30:39] "GET / HTTP/1.1" 200 -
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.142:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:46:21] "[31m[1mGET /upload_photo/2 HTTP/1.1[0m" 401 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:46:23] "GET / HTTP/1.1" 200 -
+INFO:root:Login successful for user: duygu
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:46:35] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:46:35] "GET /student/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:46:38] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:46:46] "[32mPOST /upload_photo/2 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:46:46] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:46:46] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:46:59] "[32mPOST /upload_photo/2 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:46:59] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:46:59] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:flask-limiter:ratelimit 5 per 1 minute (127.0.0.1) exceeded at endpoint: main.upload_photo
+ERROR:root:Too many attempts from user.
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:47:05] "[31m[1mPOST /upload_photo/2 HTTP/1.1[0m" 429 -
+INFO:flask-limiter:ratelimit 5 per 1 minute (127.0.0.1) exceeded at endpoint: main.upload_photo
+ERROR:root:Too many attempts from user.
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:47:11] "[31m[1mGET /upload_photo/2 HTTP/1.1[0m" 429 -
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.142:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:47:27] "GET / HTTP/1.1" 200 -
+INFO:root:Login successful for user: duygu
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:47:34] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:47:34] "GET /student/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:47:34] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:47:39] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:47:39] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:47:45] "[32mPOST /upload_photo/2 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:47:45] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:47:45] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:47:59] "[32mPOST /upload_photo/2 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:47:59] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:47:59] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:flask-limiter:ratelimit 5 per 1 minute (127.0.0.1) exceeded at endpoint: main.upload_photo
+ERROR:root:Too many attempts from user.
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:48:02] "[31m[1mPOST /upload_photo/2 HTTP/1.1[0m" 429 -
+INFO:flask-limiter:ratelimit 5 per 1 minute (127.0.0.1) exceeded at endpoint: main.upload_photo
+ERROR:root:Too many attempts from user.
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:48:04] "[31m[1mGET /upload_photo/2 HTTP/1.1[0m" 429 -
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.142:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:48:15] "GET / HTTP/1.1" 200 -
+INFO:root:Login successful for user: duygu
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:48:21] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:48:21] "GET /student/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:48:21] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:48:24] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:48:24] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:48:27] "[32mPOST /upload_photo/2 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:48:27] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:48:27] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:48:50] "[32mPOST /upload_photo/2 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:48:50] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 01:48:50] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.51.16.228:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:40:55] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:40:55] "GET /static/logo.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:40:55] "GET /static/navbar.png HTTP/1.1" 200 -
+INFO:root:Login successful for user: duygu
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:41:14] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:41:14] "GET /student/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:41:14] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:41:14] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:41:14] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:41:14] "GET /static/bg.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:41:18] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:41:18] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:41:18] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:41:18] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:43:19] "[32mPOST /upload_photo/2 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:43:19] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:43:19] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:43:19] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:43:19] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:44:40] "[32mPOST /upload_photo/2 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:44:40] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:44:40] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:44:40] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:44:40] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:44:45] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:44:45] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:44:45] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:44:45] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:44:56] "[32mPOST /upload_photo/2 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:44:56] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:44:57] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:44:57] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:44:57] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:flask-limiter:ratelimit 5 per 1 minute (127.0.0.1) exceeded at endpoint: main.upload_photo
+ERROR:root:Too many attempts from user.
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:45:00] "[31m[1mGET /upload_photo/2 HTTP/1.1[0m" 429 -
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.51.16.228:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:47:33] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:47:33] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:47:33] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:47:33] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:48:01] "[32mPOST /upload_photo/2 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:48:01] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:48:01] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:48:01] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:48:01] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:11] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:11] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:12] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:12] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:12] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:12] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:12] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:12] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:22] "[32mPOST /upload_photo/2 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:22] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:22] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:22] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:22] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:28] "GET /student/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:28] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:28] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:28] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:28] "[36mGET /static/bg.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:31] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:31] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:31] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:31] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:flask-limiter:ratelimit 5 per 1 minute (127.0.0.1) exceeded at endpoint: main.upload_photo
+ERROR:root:Too many attempts from user.
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:39] "[31m[1mPOST /upload_photo/2 HTTP/1.1[0m" 429 -
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.51.16.228:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:51] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:51] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:51] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:58:51] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:59:10] "[32mPOST /upload_photo/2 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:59:10] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:59:10] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:59:10] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:59:10] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:59:40] "[32mPOST /upload_photo/2 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:59:40] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:59:40] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:59:40] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 18:59:40] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:00:06] "[32mPOST /upload_photo/2 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:00:06] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:00:06] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:00:06] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:00:06] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:00:51] "[32mPOST /upload_photo/2 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:00:51] "GET /upload_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:00:51] "GET /get_profile_photo/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:00:51] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/Jan/2025 19:00:51] "[36mGET /static/navbar.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:werkzeug: * Detected change in 'C:\\Users\\suuser\\Desktop\\SEC537-Mitigated-webapp\\app\\routes.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 391-463-866
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler has been shut down

@@ -459,6 +459,8 @@ def upload_photo(student_id):
     role = session.get('role')
     profile_photo = None
 
+    WHITELISTED_DOMAINS = ['i.pinimg.com', 'i.imgur.com', 'images.unsplash.com']
+    
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
 
@@ -478,18 +480,15 @@ def upload_photo(student_id):
                     flash('Invalid URL! Only HTTP/HTTPS URLs are allowed.')
                     return redirect(url_for('main.upload_photo', student_id=student_id))
 
-                #URL validation using stricter regex
-                url_regex = r'^https?://[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(/.*)?$'
-                if not re.match(url_regex, photo_url):
-                    flash('Invalid URL format.')
+                
+                domain = photo_url.split('/')[2] #get domain 
+                if domain not in WHITELISTED_DOMAINS:
+                    flash('URL is not from a trusted domain.')
                     return redirect(url_for('main.upload_photo', student_id=student_id))
 
                 #perform DNS resolution and check for private IPs
                 try:
-                    domain = photo_url.split('/')[2]  # Extract domain from URL
-                    ip_address = socket.gethostbyname(domain)  # DNS resolution
-
-                    #check for private IP addresses
+                    ip_address = socket.gethostbyname(domain) # DNS resolution
                     if ip_address.startswith(("127.", "192.168.", "10.", "169.254.")):
                         flash('URL points to a private network address. Not allowed!')
                         return redirect(url_for('main.upload_photo', student_id=student_id))
